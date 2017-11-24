@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FuncionarioDAO {
     
-    private ArrayList<FuncionarioDTO> funcionarios = null;
+    private ArrayList<FuncionarioDTO> funcionarios = new ArrayList<FuncionarioDTO>();
     private FuncionarioDTO funcionario = null;
     private Connection con = null;
     
@@ -185,10 +185,12 @@ public class FuncionarioDAO {
             con = Conexao.getConexao();
             String sql = "SELECT * FROM funcionario";
             PreparedStatement ps = null;
-
+            
+            List parametros = new ArrayList<>();
+            
             if(funcionario.getId() > 0){
                 sql += " WHERE ID = ? ";
-                ps.setInt(1, funcionario.getId());
+                parametros.add(funcionario.getId());
             }else{
                 List alt = funcionario.getAlterado();
                 String sqlWhere = "";
@@ -196,44 +198,44 @@ public class FuncionarioDAO {
 
                 if(alt.contains("nome")) {
                     sqlWhere += " nome = ? ";
-                    ps.setString(index, funcionario.getNome());
-                    index++;
+                    parametros.add(funcionario.getNome());
                 }
                 if(alt.contains("endereco")){
                     sqlWhere += " endereco = ? ";
-                    ps.setString(index, funcionario.getEndereco());
-                    index++;
+                    parametros.add(funcionario.getEndereco());
                 }
                 if(alt.contains("telefone")){
                     sqlWhere += " telefone = ? ";
-                    ps.setString(index, funcionario.getTelefone());
-                    index++;
+                    parametros.add(funcionario.getTelefone());
                 }
                 if(alt.contains("cpf")){
                     sqlWhere += " cpf = ? ";
-                    ps.setString(index, funcionario.getCpf());
-                    index++;
+                    parametros.add(funcionario.getCpf());
                 }
                 if(alt.contains("salario")){
                     sqlWhere += " salario = ? ";
-                    ps.setDouble(index, funcionario.getSalario());
-                    index++;
+                    parametros.add(funcionario.getSalario());
                 }
                 if(alt.contains("cargo")){
                     sqlWhere += " cargo = ? ";
-                    ps.setString(index, funcionario.getCargo());
-                    index++;
+                    parametros.add(funcionario.getCargo());
                 }
 
                 if(sqlWhere.length() > 0) sql += " WHERE " + sqlWhere;
             }
 
             ps = con.prepareStatement(sql);
-
+            int index = 1;
+            
+            for(Object i : parametros){
+                ps.setObject(index, i);
+                index++;
+            }
+            
             ResultSet rs = ps.executeQuery();
             
             if(!rs.next()) {
-                return null;
+                return this.funcionarios;
             }
             
             do {

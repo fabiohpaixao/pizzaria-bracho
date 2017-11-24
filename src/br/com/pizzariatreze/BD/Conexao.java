@@ -6,7 +6,7 @@ public class Conexao {
     
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String USUARIO = "root";
-    private static final String SENHA = "root";
+    private static final String SENHA = "";
     private static final String SERVIDOR = "localhost";
     private static final String DB = "Pizzaria";
     private static final String STR_CONEXAO = "jdbc:mysql://"+SERVIDOR+":3306/"+DB;

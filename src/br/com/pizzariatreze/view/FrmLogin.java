@@ -62,6 +62,11 @@ public class FrmLogin extends javax.swing.JFrame {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         txtSenha.setToolTipText("");
 
@@ -143,8 +148,9 @@ public class FrmLogin extends javax.swing.JFrame {
     private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
         // TODO add your handling code here:
         LoginController login = new LoginController();
-
-        if(login.logar(txtLogin.getText(), txtSenha.toString())){
+        char[] chars = txtSenha.getPassword();  
+        String password = String.valueOf(chars);  
+        if(login.logar(txtLogin.getText(), password)){
             TelaInicial inicio = new TelaInicial();
             this.setVisible(false);
             inicio.setVisible(true);
@@ -157,6 +163,11 @@ public class FrmLogin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
