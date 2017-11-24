@@ -2,6 +2,7 @@ package br.com.pizzariatreze.model;
 
 import br.com.pizzariatreze.DAO.FuncionarioDAO;
 import br.com.pizzariatreze.DTO.FuncionarioDTO;
+import br.com.pizzariatreze.util.Util;
 import java.util.Map;
 import java.util.ArrayList;
 
@@ -66,6 +67,18 @@ public class Funcionario extends Pessoa {
     }
 
     public boolean login(String usuario, String senha) {
+        
+        FuncionarioDTO funcionario = new FuncionarioDTO();
+        
+        String senhaMD5 = Util.criptografar(senha);
+        funcionario.setCpf(usuario);
+        funcionario.setSenha(senhaMD5);
+        
+        FuncionarioDAO func = new FuncionarioDAO();
+        
+        if(!func.search(funcionario).isEmpty())
+            return true;
+        
         return false;
     }
 

@@ -1,6 +1,8 @@
 package br.com.pizzariatreze.DTO;
 
 import br.com.pizzariatreze.DAO.FuncionarioDAO;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class FuncionarioDTO extends PessoaDTO {
@@ -15,6 +17,9 @@ public class FuncionarioDTO extends PessoaDTO {
         super(id,nome,endereco,telefone,cpf);
         this.setSalario(salario);
         this.setCargo(cargo);
+        
+        alterado.add("salario");
+        alterado.add("cargo");
     }
 
     public double getSalario() {
@@ -23,6 +28,8 @@ public class FuncionarioDTO extends PessoaDTO {
 
     public void setSalario(double salario) {
         this.salario = salario;
+
+        if(!alterado.contains("salario")) alterado.add("salario");
     }
 
     public String getCargo() {
@@ -31,5 +38,7 @@ public class FuncionarioDTO extends PessoaDTO {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+        
+        if(!alterado.contains("cargo")) alterado.add("cargo");
     }
 }

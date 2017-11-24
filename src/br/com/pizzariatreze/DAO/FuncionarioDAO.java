@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import br.com.pizzariatreze.DTO.FuncionarioDTO;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FuncionarioDAO {
     
@@ -78,14 +79,12 @@ public class FuncionarioDAO {
                 return this.funcionarios;
             } while (rs.next());
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
             if (con != null) {
                 try {
                     con.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -179,4 +178,80 @@ public class FuncionarioDAO {
         
         return result;
     }    
+
+    public ArrayList<FuncionarioDTO> search(FuncionarioDTO funcionario) {
+        
+        try{
+            con = Conexao.getConexao();
+            String sql = "SELECT * FROM funcionario";
+            PreparedStatement ps = null;
+
+            if(funcionario.getId() > 0){
+                sql += " WHERE ID = ? ";
+                ps.setInt(1, funcionario.getId());
+            }else{
+                List alt = funcionario.getAlterado();
+                String sqlWhere = "";
+                int index = 1;
+
+                if(alt.contains("nome")) {
+                    sqlWhere += " nome = ? ";
+                    ps.setString(index, funcionario.getNome());
+                    index++;
+                }
+                if(alt.contains("endereco")){
+                    sqlWhere += " endereco = ? ";
+                    ps.setString(index, funcionario.getEndereco());
+                    index++;
+                }
+                if(alt.contains("telefone")){
+                    sqlWhere += " telefone = ? ";
+                    ps.setString(index, funcionario.getTelefone());
+                    index++;
+                }
+                if(alt.contains("cpf")){
+                    sqlWhere += " cpf = ? ";
+                    ps.setString(index, funcionario.getCpf());
+                    index++;
+                }
+                if(alt.contains("salario")){
+                    sqlWhere += " salario = ? ";
+                    ps.setDouble(index, funcionario.getSalario());
+                    index++;
+                }
+                if(alt.contains("cargo")){
+                    sqlWhere += " cargo = ? ";
+                    ps.setString(index, funcionario.getCargo());
+                    index++;
+                }
+
+                if(sqlWhere.length() > 0) sql += " WHERE " + sqlWhere;
+            }
+
+            ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            
+            if(!rs.next()) {
+                return null;
+            }
+            
+            do {
+                this.funcionario = new FuncionarioDTO();
+                this.funcionario.setId(rs.getInt("id"));
+                this.funcionario.setTelefone(rs.getString("telefone"));
+                this.funcionario.setNome(rs.getString("nome"));
+                this.funcionario.setEndereco(rs.getString("endereco"));
+                this.funcionario.setSalario(rs.getDouble("salario"));
+                this.funcionario.setCpf(rs.getString("cpf"));
+                this.funcionario.setCargo(rs.getString("cargo"));                
+                this.funcionarios.add(this.funcionario);
+            } while (rs.next());
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return this.funcionarios;
+    }
 }
