@@ -1,13 +1,12 @@
 package br.com.pizzariatreze.dao;
 
-import br.com.pizzariatreze.BD.Conexao;
+import br.com.pizzariatreze.bd.Conexao;
+import br.com.pizzariatreze.dto.Mesadto;
+import br.com.pizzariatreze.dto.Reservadto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import br.com.pizzariatreze.dto.Reservadto;
-import br.com.pizzariatreze.model.Mesa;
-import br.com.pizzariatreze.dao.Mesadao;
 import java.util.ArrayList;
 
 public class Reservadao {    
@@ -15,13 +14,12 @@ public class Reservadao {
     private Reservadto reserva = null;
     private Connection con = null;
     
-    public Reservadao getById(int id) {
+    public Reservadto getById(int id) {
         this.reserva = null;
         PreparedStatement ps = null;
         String mesas = null;
         String[] mesasSplit = null;
-//        ArrayList<Mesa> composicao = null;
-//        MesaDAO mesaDao = new MesaDAO();
+        Mesadao mesaDao = new Mesadao();
         
         try {
             con = Conexao.getConexao();
@@ -29,7 +27,7 @@ public class Reservadao {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                this.reserva = new Reservadao();
+                this.reserva = new Reservadto();
                 this.reserva.setId(rs.getInt("id"));
                 this.reserva.setNome(rs.getString("nome"));
                 this.reserva.setStatus(rs.getInt("status"));
@@ -37,11 +35,8 @@ public class Reservadao {
                 mesas = rs.getString("composicao");
                 mesasSplit = mesas.split(",");
                 for (int i = 0; i < mesasSplit.length; i++) {
-                    this.reserva.setComposicao(Integer.parseInt(mesasSplit[i]));
+                    this.reserva.setComposicao(mesaDao.getById(Integer.parseInt(mesasSplit[i])));
                 }
-//                for (int i = 0; i < mesasSplit.length; i++) {
-//                    composicao.add(mesaDao.getById(Integer.parseInt(mesasSplit[i])));
-//                }
                 return this.reserva;
             } else {
                 return null;
@@ -60,12 +55,13 @@ public class Reservadao {
         }
     }
     
-    public ArrayList<Reservadao> getByNome(String nome) {
+    public ArrayList<Reservadto> getByNome(String nome) {
         this.reservas.clear();
         this.reserva = null;
         PreparedStatement ps = null;
         String mesas = null;
         String[] mesasSplit = null;
+        Mesadao mesaDao = new Mesadao();
         
         try {
             con = Conexao.getConexao();
@@ -78,7 +74,7 @@ public class Reservadao {
             }
             
             do {
-                this.reserva = new Reservadao();
+                this.reserva = new Reservadto();
                 this.reserva.setId(rs.getInt("id"));
                 this.reserva.setNome(rs.getString("nome"));
                 this.reserva.setStatus(rs.getInt("status"));
@@ -86,7 +82,7 @@ public class Reservadao {
                 mesas = rs.getString("composicao");
                 mesasSplit = mesas.split(",");
                 for (int i = 0; i < mesasSplit.length; i++) {
-                    this.reserva.setComposicao(Integer.parseInt(mesasSplit[i]));
+                    this.reserva.setComposicao(mesaDao.getById(Integer.parseInt(mesasSplit[i])));
                 }
                 this.reservas.add(this.reserva);
                 return this.reservas;
@@ -105,12 +101,13 @@ public class Reservadao {
         }
     }
 
-    public ArrayList<Reservadao> getByStatus(int status) {
+    public ArrayList<Reservadto> getByStatus(int status) {
         this.reservas.clear();
         this.reserva = null;
         PreparedStatement ps = null;
         String mesas = null;
         String[] mesasSplit = null;
+        Mesadao mesaDao = new Mesadao();
         
         try {
             con = Conexao.getConexao();
@@ -123,7 +120,7 @@ public class Reservadao {
             }
             
             do {
-                this.reserva = new Reservadao();
+                this.reserva = new Reservadto();
                 this.reserva.setId(rs.getInt("id"));
                 this.reserva.setNome(rs.getString("nome"));
                 this.reserva.setStatus(rs.getInt("status"));
@@ -131,7 +128,7 @@ public class Reservadao {
                 mesas = rs.getString("composicao");
                 mesasSplit = mesas.split(",");
                 for (int i = 0; i < mesasSplit.length; i++) {
-                    this.reserva.setComposicao(Integer.parseInt(mesasSplit[i]));
+                    this.reserva.setComposicao(mesaDao.getById(Integer.parseInt(mesasSplit[i])));
                 }
                 this.reservas.add(this.reserva);
                 return this.reservas;
@@ -150,14 +147,14 @@ public class Reservadao {
         }
     }
     
-    public String save(Reservadao reserva) {
+    public String save(Reservadto reserva) {
         String result = "Erro ao inserir/atualizar a reserva";
         String query = null;
         PreparedStatement ps = null;
         String mesas = null;
         
         if(reserva.getId() != 0) {
-            Reservadao reservaBD = this.getById(reserva.getId());
+            Reservadto reservaBD = this.getById(reserva.getId());
             if(reservaBD != null) {
                 query = "UPDATE reserva SET nome = ?, status = ?, data = ?, composicao = ? WHERE id = ?";
                 try {
@@ -165,9 +162,9 @@ public class Reservadao {
                     ps.setString(1, reserva.getNome());
                     ps.setInt(2, reserva.getStatus());
                     ps.setString(3, reserva.getData());
-                    mesas = String.valueOf(reserva.getComposicao().get(0));
+                    mesas = String.valueOf(reserva.getComposicao().get(0).getId());
                     for(int i = 1; i < reserva.getComposicao().size(); i++) {
-                        mesas = mesas + "," + String.valueOf(reserva.getComposicao().get(i));
+                        mesas = mesas + "," + String.valueOf(reserva.getComposicao().get(i).getId());
                     }
                     ps.setString(4, mesas);
                     ps.setInt(5, reserva.getId());
@@ -186,9 +183,9 @@ public class Reservadao {
             ps.setString(1, reserva.getNome());
             ps.setInt(2, reserva.getStatus());
             ps.setString(3, reserva.getData());
-            mesas = String.valueOf(reserva.getComposicao().get(0));
+            mesas = String.valueOf(reserva.getComposicao().get(0).getId());
             for(int i = 1; i < reserva.getComposicao().size(); i++) {
-                mesas = mesas + "," + String.valueOf(reserva.getComposicao().get(i));
+                mesas = mesas + "," + String.valueOf(reserva.getComposicao().get(i).getId());
             }
             ps.setString(4, mesas);
             if(reserva.getId() != 0) {
