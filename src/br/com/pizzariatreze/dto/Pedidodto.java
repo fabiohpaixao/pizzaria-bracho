@@ -11,16 +11,16 @@ import java.util.ArrayList;
  *
  * @author Fabio
  */
-public class PedidoDTO {
+public class Pedidodto {
     private int id;
     private String data;
     private int status;
     private String descricao;
     private int tipo;
     private double preco;
-    private ClienteDTO cliente;
-    private FuncionarioDTO funcionario;
-    private ArrayList<ProdutoDTO> composicao;
+    private Clientedto cliente;
+    private Funcionariodto funcionario;
+    private ArrayList<Produtodto> composicao;
 
     public int getId() {
         return id;
@@ -70,27 +70,27 @@ public class PedidoDTO {
         this.preco = preco;
     }
 
-    public ClienteDTO getCliente() {
+    public Clientedto getCliente() {
         return cliente;
     }
 
-    public void setCliente(ClienteDTO cliente) {
+    public void setCliente(Clientedto cliente) {
         this.cliente = cliente;
     }
 
-    public FuncionarioDTO getFuncionario() {
+    public Funcionariodto getFuncionario() {
         return funcionario;
     }
 
-    public void setFuncionario(FuncionarioDTO funcionario) {
+    public void setFuncionario(Funcionariodto funcionario) {
         this.funcionario = funcionario;
     }
 
-    public ArrayList<ProdutoDTO> getComposicao() {
+    public ArrayList<Produtodto> getComposicao() {
         return composicao;
     }
 
-    public void setComposicao(ArrayList<ProdutoDTO> composicao) {
+    public void setComposicao(ArrayList<Produtodto> composicao) {
         this.composicao = composicao;
     }
 }

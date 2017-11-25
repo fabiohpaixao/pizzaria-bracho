@@ -2,13 +2,13 @@ package br.com.pizzariatreze.dto;
 
 import java.util.ArrayList;
 
-public class ProdutoDTO {
+public class Produtodto {
     
     private int id;
     private String descricao;
     private String nome;
     private double preco;
-    private ArrayList<IngredienteDTO> composicao;
+    private ArrayList<Ingredientedto> composicao;
 
     public int getId() {
         return id;
@@ -42,11 +42,11 @@ public class ProdutoDTO {
         this.preco = preco;
     }
 
-    public ArrayList<IngredienteDTO> getComposicao() {
+    public ArrayList<Ingredientedto> getComposicao() {
         return composicao;
     }
 
-    public void setComposicao(IngredienteDTO ingrediente) {
+    public void setComposicao(Ingredientedto ingrediente) {
         this.composicao.add(ingrediente);
     }
 }

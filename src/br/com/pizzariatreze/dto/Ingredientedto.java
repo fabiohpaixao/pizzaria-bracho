@@ -1,6 +1,6 @@
 package br.com.pizzariatreze.dto;
 
-public class IngredienteDTO {
+public class Ingredientedto {
 
     private int id;
     private String nome;

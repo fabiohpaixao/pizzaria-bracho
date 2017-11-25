@@ -1,19 +1,19 @@
 package br.com.pizzariatreze.dto;
 
-import br.com.pizzariatreze.dao.FuncionarioDAO;
+import br.com.pizzariatreze.dao.Funcionariodao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class FuncionarioDTO extends PessoaDTO {
+public class Funcionariodto extends Pessoadto {
 
     private double salario;
     private String cargo;
     
-    public FuncionarioDTO(){
+    public Funcionariodto(){
     }
 
-    public FuncionarioDTO(int id, String nome, String endereco, String telefone, String cpf, double salario, String cargo){
+    public Funcionariodto(int id, String nome, String endereco, String telefone, String cpf, double salario, String cargo){
         super(id,nome,endereco,telefone,cpf);
         this.setSalario(salario);
         this.setCargo(cargo);

@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import br.com.pizzariatreze.DTO.Produto;
 
-public class ProdutoDAO {
+public class Produtodao {
 
-    private ArrayList<ProdutoDAO> produtos = null;
-    private ProdutoDAO produto = null;
+    private ArrayList<Produtodao> produtos = null;
+    private Produtodao produto = null;
     private Connection con = null;
     
-    public ProdutoDAO getById(int id) {
+    public Produtodao getById(int id) {
         this.produto = null;
         PreparedStatement ps = null;
         String ingredientes = null;
@@ -26,7 +26,7 @@ public class ProdutoDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                this.produto = new ProdutoDAO();
+                this.produto = new Produtodao();
                 this.produto.setId(rs.getInt("id"));
                 this.produto.setNome(rs.getString("nome"));
                 this.produto.setPreco(rs.getDouble("preco"));
@@ -34,7 +34,7 @@ public class ProdutoDAO {
                 ingredientes = rs.getString("composicao");
                 ingredientesSplit = ingredientes.split(",");
                 for (int i = 0; i < ingredientesSplit.length; i++) {
-                    IngredienteDAO
+                    Ingredientedao
                     this.produto.setComposicao(Integer.parseInt(ingredientesSplit[i]));
                 }
                 return this.produto;
@@ -55,7 +55,7 @@ public class ProdutoDAO {
         }
     }
     
-    public ArrayList<ProdutoDAO> getByNome(String nome) {
+    public ArrayList<Produtodao> getByNome(String nome) {
         this.produto = null;
         this.produtos.clear();
         PreparedStatement ps = null;
@@ -73,7 +73,7 @@ public class ProdutoDAO {
             }
             
             do {
-                this.produto = new ProdutoDAO();
+                this.produto = new Produtodao();
                 this.produto.setId(rs.getInt("id"));
                 this.produto.setNome(rs.getString("nome"));
                 this.produto.setPreco(rs.getDouble("preco"));
@@ -100,7 +100,7 @@ public class ProdutoDAO {
         }
     }
 
-    public ArrayList<ProdutoDAO> getByDescricao(String descricao) {
+    public ArrayList<Produtodao> getByDescricao(String descricao) {
         this.produto = null;
         this.produtos.clear();
         PreparedStatement ps = null;
@@ -118,7 +118,7 @@ public class ProdutoDAO {
             }
             
             do {
-                this.produto = new ProdutoDAO();
+                this.produto = new Produtodao();
                 this.produto.setId(rs.getInt("id"));
                 this.produto.setNome(rs.getString("nome"));
                 this.produto.setPreco(rs.getDouble("preco"));
@@ -145,7 +145,7 @@ public class ProdutoDAO {
         }
     }
     
-    public ArrayList<ProdutoDAO> getByIngrediente(int ingredienteId) {
+    public ArrayList<Produtodao> getByIngrediente(int ingredienteId) {
         this.produto = null;
         this.produtos.clear();
         PreparedStatement ps = null;
@@ -163,7 +163,7 @@ public class ProdutoDAO {
             }
             
             do {
-                this.produto = new ProdutoDAO();
+                this.produto = new Produtodao();
                 this.produto.setId(rs.getInt("id"));
                 this.produto.setNome(rs.getString("nome"));
                 this.produto.setPreco(rs.getDouble("preco"));
@@ -190,14 +190,14 @@ public class ProdutoDAO {
         }
     }
     
-    public String save(ProdutoDAO produto) {
+    public String save(Produtodao produto) {
         String result = "Erro ao inserir/atualizar o cliente";
         String query = null;
         PreparedStatement ps = null;
         String ingredientes = null;
         
         if(produto.getId() != 0) {
-            ProdutoDAO produtoBD = this.getById(produto.getId());
+            Produtodao produtoBD = this.getById(produto.getId());
             if(produtoBD != null) {
                 query = "UPDATE produto SET nome = ?, preco = ?, descricao = ?, composicao = ? WHERE id = ?";
                 try {

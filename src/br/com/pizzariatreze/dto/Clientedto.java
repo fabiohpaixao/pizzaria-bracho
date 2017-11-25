@@ -9,6 +9,6 @@ package br.com.pizzariatreze.dto;
  *
  * @author Bracho
  */
-public class ClienteDTO  extends PessoaDTO {
+public class Clientedto  extends Pessoadto {
     
 }

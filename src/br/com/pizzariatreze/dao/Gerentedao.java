@@ -6,15 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import br.com.pizzariatreze.dto.GerenteDTO;
+import br.com.pizzariatreze.dto.Gerentedto;
 
-public class GerenteDAO {
+public class Gerentedao {
     
-    private ArrayList<GerenteDTO> gerentes = null;
-    private GerenteDTO gerente = null;
+    private ArrayList<Gerentedto> gerentes = null;
+    private Gerentedto gerente = null;
     private Connection con = null;
     
-    public GerenteDTO getById(int id) {
+    public Gerentedto getById(int id) {
         this.gerente = null;
         PreparedStatement ps = null;
         
@@ -24,7 +24,7 @@ public class GerenteDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                this.gerente = new GerenteDTO();
+                this.gerente = new Gerentedto();
                 this.gerente.setId(rs.getInt("id"));
                 this.gerente.setTelefone(rs.getString("telefone"));
                 this.gerente.setNome(rs.getString("nome"));
@@ -50,7 +50,7 @@ public class GerenteDAO {
         }
     }
     
-    public ArrayList<GerenteDTO> getByNome(String nome) {
+    public ArrayList<Gerentedto> getByNome(String nome) {
         this.gerentes.clear();
         this.gerente = null;
         PreparedStatement ps = null;
@@ -66,7 +66,7 @@ public class GerenteDAO {
             }
             
             do {
-                this.gerente = new GerenteDTO();
+                this.gerente = new Gerentedto();
                 this.gerente.setId(rs.getInt("id"));
                 this.gerente.setTelefone(rs.getString("telefone"));
                 this.gerente.setNome(rs.getString("nome"));
@@ -91,7 +91,7 @@ public class GerenteDAO {
         }
     }
 
-    public ArrayList<GerenteDTO> getByTelefone(String telefone) {
+    public ArrayList<Gerentedto> getByTelefone(String telefone) {
         this.gerentes.clear();
         this.gerente = null;
         PreparedStatement ps = null;
@@ -107,7 +107,7 @@ public class GerenteDAO {
             }
             
             do {
-                this.gerente = new GerenteDTO();
+                this.gerente = new Gerentedto();
                 this.gerente.setId(rs.getInt("id"));
                 this.gerente.setTelefone(rs.getString("telefone"));
                 this.gerente.setNome(rs.getString("nome"));
@@ -132,13 +132,13 @@ public class GerenteDAO {
         }
     }
     
-    public String save(GerenteDTO gerente) {
+    public String save(Gerentedto gerente) {
         String result = "Erro ao inserir/atualizar o gerente";
         String query = null;
         PreparedStatement ps = null;
         
         if(gerente.getId() != 0) {
-            GerenteDTO gerenteBD = this.getById(gerente.getId());
+            Gerentedto gerenteBD = this.getById(gerente.getId());
             if(gerenteBD != null) {
                 query = "UPDATE funcionario SET nome = ?, telefone = ?, cpf = ?, endereco = ?, cargo = ?, salario = ? WHERE id = ? AND cargo = 'Gerente'";
                 try {

@@ -2,7 +2,7 @@ package br.com.pizzariatreze.dto;
 
 import java.util.ArrayList;
 
-public class MesaDTO {
+public class Mesadto {
     private int id;
     private int numero;
     private int qtdLugares;
