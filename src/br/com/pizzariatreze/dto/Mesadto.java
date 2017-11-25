@@ -8,6 +8,19 @@ public class Mesadto {
     private int qtdLugares;
     private ArrayList<Integer> codReserva = new ArrayList<Integer>();
     
+    public Mesadto() {
+    }
+    
+    public Mesadto(int id, int numero, int qtdLugares, ArrayList<Integer> codReserva) {
+        this.setId(id);
+        this.setNumero(numero);
+        this.setQtdLugares(qtdLugares);
+        
+        for(int i = 0; i < codReserva.size(); i++) {
+            this.setCodReserva(codReserva.get(i));
+        }
+    }
+
     public ArrayList<Integer> getCodReserva() {
         return codReserva;
     }
