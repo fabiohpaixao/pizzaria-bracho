@@ -1,24 +1,25 @@
 package br.com.pizzariatreze.dao;
 
-import br.com.pizzariatreze.BD.Conexao;
+import br.com.pizzariatreze.bd.Conexao;
+import br.com.pizzariatreze.dto.Produtodto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import br.com.pizzariatreze.DTO.Produto;
 
 public class Produtodao {
 
-    private ArrayList<Produtodao> produtos = null;
-    private Produtodao produto = null;
+    private ArrayList<Produtodto> produtos = null;
+    private Produtodto produto = null;
     private Connection con = null;
     
-    public Produtodao getById(int id) {
+    public Produtodto getById(int id) {
         this.produto = null;
         PreparedStatement ps = null;
         String ingredientes = null;
         String[] ingredientesSplit = null;
+        Ingredientedao ingredienteDao = new Ingredientedao();
 
         try {
             con = Conexao.getConexao();
@@ -26,7 +27,7 @@ public class Produtodao {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                this.produto = new Produtodao();
+                this.produto = new Produtodto();
                 this.produto.setId(rs.getInt("id"));
                 this.produto.setNome(rs.getString("nome"));
                 this.produto.setPreco(rs.getDouble("preco"));
@@ -34,8 +35,7 @@ public class Produtodao {
                 ingredientes = rs.getString("composicao");
                 ingredientesSplit = ingredientes.split(",");
                 for (int i = 0; i < ingredientesSplit.length; i++) {
-                    Ingredientedao
-                    this.produto.setComposicao(Integer.parseInt(ingredientesSplit[i]));
+                    this.produto.setComposicao(ingredienteDao.getById(Integer.parseInt(ingredientesSplit[i])));
                 }
                 return this.produto;
             } else {
@@ -55,12 +55,13 @@ public class Produtodao {
         }
     }
     
-    public ArrayList<Produtodao> getByNome(String nome) {
+    public ArrayList<Produtodto> getByNome(String nome) {
         this.produto = null;
         this.produtos.clear();
         PreparedStatement ps = null;
         String ingredientes = null;
         String[] ingredientesSplit = null;
+        Ingredientedao ingredienteDao = new Ingredientedao();
         
         try {
             con = Conexao.getConexao();
@@ -73,7 +74,7 @@ public class Produtodao {
             }
             
             do {
-                this.produto = new Produtodao();
+                this.produto = new Produtodto();
                 this.produto.setId(rs.getInt("id"));
                 this.produto.setNome(rs.getString("nome"));
                 this.produto.setPreco(rs.getDouble("preco"));
@@ -81,7 +82,7 @@ public class Produtodao {
                 ingredientes = rs.getString("composicao");
                 ingredientesSplit = ingredientes.split(",");
                 for (int i = 0; i < ingredientesSplit.length; i++) {
-                    this.produto.setComposicao(Integer.parseInt(ingredientesSplit[i]));
+                    this.produto.setComposicao(ingredienteDao.getById(Integer.parseInt(ingredientesSplit[i])));
                 }
                 this.produtos.add(this.produto);
                 return this.produtos;
@@ -100,12 +101,13 @@ public class Produtodao {
         }
     }
 
-    public ArrayList<Produtodao> getByDescricao(String descricao) {
+    public ArrayList<Produtodto> getByDescricao(String descricao) {
         this.produto = null;
         this.produtos.clear();
         PreparedStatement ps = null;
         String ingredientes = null;
         String[] ingredientesSplit = null;
+        Ingredientedao ingredienteDao = new Ingredientedao();
         
         try {
             con = Conexao.getConexao();
@@ -118,7 +120,7 @@ public class Produtodao {
             }
             
             do {
-                this.produto = new Produtodao();
+                this.produto = new Produtodto();
                 this.produto.setId(rs.getInt("id"));
                 this.produto.setNome(rs.getString("nome"));
                 this.produto.setPreco(rs.getDouble("preco"));
@@ -126,7 +128,7 @@ public class Produtodao {
                 ingredientes = rs.getString("composicao");
                 ingredientesSplit = ingredientes.split(",");
                 for (int i = 0; i < ingredientesSplit.length; i++) {
-                    this.produto.setComposicao(Integer.parseInt(ingredientesSplit[i]));
+                    this.produto.setComposicao(ingredienteDao.getById(Integer.parseInt(ingredientesSplit[i])));
                 }
                 this.produtos.add(this.produto);
                 return this.produtos;
@@ -145,12 +147,13 @@ public class Produtodao {
         }
     }
     
-    public ArrayList<Produtodao> getByIngrediente(int ingredienteId) {
+    public ArrayList<Produtodto> getByIngrediente(int ingredienteId) {
         this.produto = null;
         this.produtos.clear();
         PreparedStatement ps = null;
         String ingredientes = null;
         String[] ingredientesSplit = null;
+        Ingredientedao ingredienteDao = new Ingredientedao();
         
         try {
             con = Conexao.getConexao();
@@ -163,7 +166,7 @@ public class Produtodao {
             }
             
             do {
-                this.produto = new Produtodao();
+                this.produto = new Produtodto();
                 this.produto.setId(rs.getInt("id"));
                 this.produto.setNome(rs.getString("nome"));
                 this.produto.setPreco(rs.getDouble("preco"));
@@ -171,7 +174,7 @@ public class Produtodao {
                 ingredientes = rs.getString("composicao");
                 ingredientesSplit = ingredientes.split(",");
                 for (int i = 0; i < ingredientesSplit.length; i++) {
-                    this.produto.setComposicao(Integer.parseInt(ingredientesSplit[i]));
+                    this.produto.setComposicao(ingredienteDao.getById(Integer.parseInt(ingredientesSplit[i])));
                 }
                 this.produtos.add(this.produto);
                 return this.produtos;
@@ -190,23 +193,23 @@ public class Produtodao {
         }
     }
     
-    public String save(Produtodao produto) {
+    public String save(Produtodto produto) {
         String result = "Erro ao inserir/atualizar o cliente";
         String query = null;
         PreparedStatement ps = null;
         String ingredientes = null;
         
         if(produto.getId() != 0) {
-            Produtodao produtoBD = this.getById(produto.getId());
+            Produtodto produtoBD = this.getById(produto.getId());
             if(produtoBD != null) {
                 query = "UPDATE produto SET nome = ?, preco = ?, descricao = ?, composicao = ? WHERE id = ?";
                 try {
                     ps = Conexao.getConexao().prepareStatement(query);
                     ps.setString(1, produto.getNome());
                     ps.setDouble(2, produto.getPreco());
-                    ingredientes = String.valueOf(produto.getComposicao().get(0));
+                    ingredientes = String.valueOf(produto.getComposicao().get(0).getId());
                     for(int i = 1; i < produto.getComposicao().size(); i++) {
-                        ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i));
+                        ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
                     }
                     ps.setString(3, ingredientes);
                     ps.setInt(4, produto.getId());
@@ -225,9 +228,9 @@ public class Produtodao {
             ps.setString(1, produto.getNome());
             ps.setDouble(2, produto.getPreco());
             ps.setString(3, produto.getDescricao());
-            ingredientes = String.valueOf(produto.getComposicao().get(0));
+            ingredientes = String.valueOf(produto.getComposicao().get(0).getId());
             for(int i = 1; i < produto.getComposicao().size(); i++) {
-                ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i));
+                ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
             }
             ps.setString(4, ingredientes);
             if(produto.getId() != 0) {
