@@ -49,4 +49,16 @@ public class Produtodto {
     public void setComposicao(Ingredientedto ingrediente) {
         this.composicao.add(ingrediente);
     }
+    
+    public void deleteComposicaoByPos(int posicao) {
+        this.composicao.remove(posicao);
+    }
+
+    public void deleteComposicaoByIdIngrediente(int idIngrediente) {
+        for (int i = 0; i < this.composicao.size(); i++) {
+            if(this.composicao.get(i).getId() == idIngrediente) {
+                deleteComposicaoByPos(i);
+            }
+        }
+    }    
 }
