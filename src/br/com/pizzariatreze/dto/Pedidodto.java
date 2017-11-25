@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.pizzariatreze.dto;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Fabio
- */
 public class Pedidodto {
     private int id;
     private String data;
@@ -90,7 +81,19 @@ public class Pedidodto {
         return composicao;
     }
 
-    public void setComposicao(ArrayList<Produtodto> composicao) {
-        this.composicao = composicao;
+    public void setComposicao(Produtodto composicao) {
+        this.composicao.add(composicao);
     }
+    
+    public void deleteComposicaoByPos(int posicao) {
+        this.composicao.remove(posicao);
+    }
+
+    public void deleteComposicaoByIdProduto(int idProduto) {
+        for(int i = 0; i < this.composicao.size(); i++) {
+            if(this.composicao.get(i).getId() == idProduto) {
+                deleteComposicaoByPos(i);
+            }
+        }
+    }    
 }
