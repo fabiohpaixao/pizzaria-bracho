@@ -1,5 +1,5 @@
 package br.com.pizzariatreze.Controller;
-//teste
+
 import br.com.pizzariatreze.model.Funcionario;
 
 public class LoginController {
