@@ -1,10 +1,5 @@
 package br.com.pizzariatreze.dto;
 
-import br.com.pizzariatreze.dao.Funcionariodao;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class Funcionariodto extends Pessoadto {
 
     private double salario;
