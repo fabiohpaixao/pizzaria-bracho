@@ -1,6 +1,6 @@
 package br.com.pizzariatreze.dao;
 
-import br.com.pizzariatreze.BD.Conexao;
+import br.com.pizzariatreze.bd.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
