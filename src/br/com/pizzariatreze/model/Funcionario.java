@@ -1,6 +1,8 @@
 package br.com.pizzariatreze.model;
 
+import br.com.pizzariatreze.dao.Clientedao;
 import br.com.pizzariatreze.dao.Funcionariodao;
+import br.com.pizzariatreze.dto.Clientedto;
 import br.com.pizzariatreze.dto.Funcionariodto;
 import br.com.pizzariatreze.util.Util;
 import java.util.Map;
@@ -50,12 +52,13 @@ public class Funcionario extends Pessoa {
         return result;
     }
     
-    public boolean cadastrarCliente(Cliente cli) {
+    public boolean cadastrarCliente(Clientedto cli) {
         boolean result = false;
         String tentativa = null;
+        Clientedao clienteDao = new Clientedao(); 
         
         try {
-            tentativa = cli.save();
+            tentativa = clienteDao.save(cli);
             if (tentativa == "Cliente criado com sucesso." || tentativa == "Cliente atualizado com sucesso.") {
                 result = true;
             }
