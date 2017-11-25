@@ -1,26 +1,29 @@
 package br.com.pizzariatreze.dao;
 
-import br.com.pizzariatreze.BD.Conexao;
+import br.com.pizzariatreze.bd.Conexao;
+import br.com.pizzariatreze.dao.Clientedao;
+import br.com.pizzariatreze.dao.Funcionariodao;
+import br.com.pizzariatreze.dto.Pedidodto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import br.com.pizzariatreze.model.Cliente;
-import br.com.pizzariatreze.model.Funcionario;
-import br.com.pizzariatreze.model.Pedido;
 
 public class Pedidodao {
 
-    private ArrayList<Pedidodao> pedidos = null;
-    private Pedidodao pedido = null;
+    private ArrayList<Pedidodto> pedidos = null;
+    private Pedidodto pedido = null;
     private Connection con = null;
     
-    public Pedidodao getById(int id) {
+    public Pedidodto getById(int id) {
         this.pedido = null;
         PreparedStatement ps = null;
         String produtos = null;
         String[] produtosSplit = null;
+        Clientedao clienteDao = new Clientedao();
+        Funcionariodao funcionarioDao = new Funcionariodao();
+        Produtodao produtoDao = new Produtodao();
         
         try {
             con = Conexao.getConexao();
@@ -28,19 +31,19 @@ public class Pedidodao {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                this.pedido = new Pedidodao();
+                this.pedido = new Pedidodto();
                 this.pedido.setId(rs.getInt("id"));
                 this.pedido.setData(rs.getString("data"));
                 this.pedido.setStatus(rs.getInt("status"));
                 this.pedido.setDescricao(rs.getString("descricao"));
                 this.pedido.setTipo(rs.getInt("tipo"));
                 this.pedido.setPreco(rs.getDouble("preco"));
-                this.pedido.setIdCliente(rs.getInt("id_cliente"));
-                this.pedido.setIdFuncionario(rs.getInt("id_funcionario"));
+                this.pedido.setCliente(clienteDao.getById(rs.getInt("id_cliente")));
+                this.pedido.setFuncionario(funcionarioDao.getById(rs.getInt("id_funcionario")));
                 produtos = rs.getString("composicao");
                 produtosSplit = produtos.split(",");
                 for (int i = 0; i < produtosSplit.length; i++) {
-                    this.pedido.setComposicao(Integer.parseInt(produtosSplit[i]));
+                    this.pedido.setComposicao(produtoDao.getById(Integer.parseInt(produtosSplit[i])));
                 }
                 return this.pedido;
             } else {
@@ -60,12 +63,15 @@ public class Pedidodao {
         }
     }
     
-    public ArrayList<Pedidodao> getByData(String data) {
+    public ArrayList<Pedidodto> getByData(String data) {
         this.pedido = null;
         this.pedidos.clear();
         PreparedStatement ps = null;
         String produtos = null;
         String[] produtosSplit = null;
+        Clientedao clienteDao = new Clientedao();
+        Funcionariodao funcionarioDao = new Funcionariodao();
+        Produtodao produtoDao = new Produtodao();
         
         try {
             con = Conexao.getConexao();
@@ -78,19 +84,19 @@ public class Pedidodao {
             }
             
             do {
-                this.pedido = new Pedidodao();
+                this.pedido = new Pedidodto();
                 this.pedido.setId(rs.getInt("id"));
                 this.pedido.setData(rs.getString("data"));
                 this.pedido.setStatus(rs.getInt("status"));
                 this.pedido.setDescricao(rs.getString("descricao"));
                 this.pedido.setTipo(rs.getInt("tipo"));
                 this.pedido.setPreco(rs.getDouble("preco"));
-                this.pedido.setIdCliente(rs.getInt("id_cliente"));
-                this.pedido.setIdFuncionario(rs.getInt("id_funcionario"));
+                this.pedido.setCliente(clienteDao.getById(rs.getInt("id_cliente")));
+                this.pedido.setFuncionario(funcionarioDao.getById(rs.getInt("id_funcionario")));
                 produtos = rs.getString("composicao");
                 produtosSplit = produtos.split(",");
                 for (int i = 0; i < produtosSplit.length; i++) {
-                    this.pedido.setComposicao(Integer.parseInt(produtosSplit[i]));
+                    this.pedido.setComposicao(produtoDao.getById(Integer.parseInt(produtosSplit[i])));
                 }
                 this.pedidos.add(this.pedido);
                 return this.pedidos;
@@ -109,12 +115,15 @@ public class Pedidodao {
         }
     }
 
-    public ArrayList<Pedidodao> getByStatus(int status) {
+    public ArrayList<Pedidodto> getByStatus(int status) {
         this.pedido = null;
         this.pedidos.clear();
         PreparedStatement ps = null;
         String produtos = null;
         String[] produtosSplit = null;
+        Clientedao clienteDao = new Clientedao();
+        Funcionariodao funcionarioDao = new Funcionariodao();
+        Produtodao produtoDao = new Produtodao();
         
         try {
             con = Conexao.getConexao();
@@ -127,19 +136,19 @@ public class Pedidodao {
             }
             
             do {
-                this.pedido = new Pedidodao();
+                this.pedido = new Pedidodto();
                 this.pedido.setId(rs.getInt("id"));
                 this.pedido.setData(rs.getString("data"));
                 this.pedido.setStatus(rs.getInt("status"));
                 this.pedido.setDescricao(rs.getString("descricao"));
                 this.pedido.setTipo(rs.getInt("tipo"));
                 this.pedido.setPreco(rs.getDouble("preco"));
-                this.pedido.setIdCliente(rs.getInt("id_cliente"));
-                this.pedido.setIdFuncionario(rs.getInt("id_funcionario"));
+                this.pedido.setCliente(clienteDao.getById(rs.getInt("id_cliente")));
+                this.pedido.setFuncionario(funcionarioDao.getById(rs.getInt("id_funcionario")));
                 produtos = rs.getString("composicao");
                 produtosSplit = produtos.split(",");
                 for (int i = 0; i < produtosSplit.length; i++) {
-                    this.pedido.setComposicao(Integer.parseInt(produtosSplit[i]));
+                    this.pedido.setComposicao(produtoDao.getById(Integer.parseInt(produtosSplit[i])));
                 }
                 this.pedidos.add(this.pedido);
                 return this.pedidos;
@@ -158,12 +167,15 @@ public class Pedidodao {
         }
     }
 
-    public ArrayList<Pedidodao> getByTipo(int tipo) {
+    public ArrayList<Pedidodto> getByTipo(int tipo) {
         this.pedido = null;
         this.pedidos.clear();
         PreparedStatement ps = null;
         String produtos = null;
         String[] produtosSplit = null;
+        Clientedao clienteDao = new Clientedao();
+        Funcionariodao funcionarioDao = new Funcionariodao();
+        Produtodao produtoDao = new Produtodao();
         
         try {
             con = Conexao.getConexao();
@@ -176,19 +188,19 @@ public class Pedidodao {
             }
             
             do {
-                this.pedido = new Pedidodao();
+                this.pedido = new Pedidodto();
                 this.pedido.setId(rs.getInt("id"));
                 this.pedido.setData(rs.getString("data"));
                 this.pedido.setStatus(rs.getInt("status"));
                 this.pedido.setDescricao(rs.getString("descricao"));
                 this.pedido.setTipo(rs.getInt("tipo"));
                 this.pedido.setPreco(rs.getDouble("preco"));
-                this.pedido.setIdCliente(rs.getInt("id_cliente"));
-                this.pedido.setIdFuncionario(rs.getInt("id_funcionario"));
+                this.pedido.setCliente(clienteDao.getById(rs.getInt("id_cliente")));
+                this.pedido.setFuncionario(funcionarioDao.getById(rs.getInt("id_funcionario")));
                 produtos = rs.getString("composicao");
                 produtosSplit = produtos.split(",");
                 for (int i = 0; i < produtosSplit.length; i++) {
-                    this.pedido.setComposicao(Integer.parseInt(produtosSplit[i]));
+                    this.pedido.setComposicao(produtoDao.getById(Integer.parseInt(produtosSplit[i])));
                 }
                 this.pedidos.add(this.pedido);
                 return this.pedidos;
@@ -207,19 +219,20 @@ public class Pedidodao {
         }
     }
 
-    public ArrayList<Pedidodao> getByCliente(int idCliente) {
-        Cliente cliente = new Cliente();
+    public ArrayList<Pedidodto> getByCliente(int idCliente) {
         this.pedido = null;
         this.pedidos.clear();
         PreparedStatement ps = null;
         String produtos = null;
         String[] produtosSplit = null;
+        Clientedao clienteDao = new Clientedao();
+        Funcionariodao funcionarioDao = new Funcionariodao();
+        Produtodao produtoDao = new Produtodao();
         
         try {
-            cliente = cliente.getById(idCliente);
             con = Conexao.getConexao();
             ps = con.prepareStatement("SELECT * FROM pedido WHERE id_cliente = ?");
-            ps.setInt(1, cliente.getId());
+            ps.setInt(1, idCliente);
             ResultSet rs = ps.executeQuery();
             
             if(!rs.next()) {
@@ -227,19 +240,19 @@ public class Pedidodao {
             }
             
             do {
-                this.pedido = new Pedidodao();
+                this.pedido = new Pedidodto();
                 this.pedido.setId(rs.getInt("id"));
                 this.pedido.setData(rs.getString("data"));
                 this.pedido.setStatus(rs.getInt("status"));
                 this.pedido.setDescricao(rs.getString("descricao"));
                 this.pedido.setTipo(rs.getInt("tipo"));
                 this.pedido.setPreco(rs.getDouble("preco"));
-                this.pedido.setIdCliente(rs.getInt("id_cliente"));
-                this.pedido.setIdFuncionario(rs.getInt("id_funcionario"));
+                this.pedido.setCliente(clienteDao.getById(rs.getInt("id_cliente")));
+                this.pedido.setFuncionario(funcionarioDao.getById(rs.getInt("id_funcionario")));
                 produtos = rs.getString("composicao");
                 produtosSplit = produtos.split(",");
                 for (int i = 0; i < produtosSplit.length; i++) {
-                    this.pedido.setComposicao(Integer.parseInt(produtosSplit[i]));
+                    this.pedido.setComposicao(produtoDao.getById(Integer.parseInt(produtosSplit[i])));
                 }
                 this.pedidos.add(this.pedido);
                 return this.pedidos;
@@ -258,19 +271,20 @@ public class Pedidodao {
         }
     }
     
-    public ArrayList<Pedidodao> getByFuncionario(int idFuncionario) {
-        Funcionario funcionario = new Funcionario();
+    public ArrayList<Pedidodto> getByFuncionario(int idFuncionario) {
         this.pedido = null;
         this.pedidos.clear();
         PreparedStatement ps = null;
         String produtos = null;
         String[] produtosSplit = null;
-        
+        Clientedao clienteDao = new Clientedao();
+        Funcionariodao funcionarioDao = new Funcionariodao();
+        Produtodao produtoDao = new Produtodao();        
+
         try {
-            funcionario = funcionario.getById(idFuncionario);
             con = Conexao.getConexao();
             ps = con.prepareStatement("SELECT * FROM pedido WHERE id_funcionario = ?");
-            ps.setInt(1, funcionario.getId());
+            ps.setInt(1, idFuncionario);
             ResultSet rs = ps.executeQuery();
             
             if(!rs.next()) {
@@ -278,19 +292,19 @@ public class Pedidodao {
             }
             
             do {
-                this.pedido = new Pedidodao();
+                this.pedido = new Pedidodto();
                 this.pedido.setId(rs.getInt("id"));
                 this.pedido.setData(rs.getString("data"));
                 this.pedido.setStatus(rs.getInt("status"));
                 this.pedido.setDescricao(rs.getString("descricao"));
                 this.pedido.setTipo(rs.getInt("tipo"));
                 this.pedido.setPreco(rs.getDouble("preco"));
-                this.pedido.setIdCliente(rs.getInt("id_cliente"));
-                this.pedido.setIdFuncionario(rs.getInt("id_funcionario"));
+                this.pedido.setCliente(clienteDao.getById(rs.getInt("id_cliente")));
+                this.pedido.setFuncionario(funcionarioDao.getById(rs.getInt("id_funcionario")));
                 produtos = rs.getString("composicao");
                 produtosSplit = produtos.split(",");
                 for (int i = 0; i < produtosSplit.length; i++) {
-                    this.pedido.setComposicao(Integer.parseInt(produtosSplit[i]));
+                    this.pedido.setComposicao(produtoDao.getById(Integer.parseInt(produtosSplit[i])));
                 }
                 this.pedidos.add(this.pedido);
                 return this.pedidos;
@@ -309,13 +323,13 @@ public class Pedidodao {
         }
     }
     
-    public String save(Pedidodao pedido) {
+    public String save(Pedidodto pedido) {
         String result = "Erro ao inserir/atualizar o cliente";
         String query = null;
         PreparedStatement ps = null;
         String produtos = null;
         if(pedido.getId() != 0) {
-            Pedidodao pedidoBD = this.getById(pedido.getId());
+            Pedidodto pedidoBD = this.getById(pedido.getId());
             if(pedidoBD != null) {
                 query = "UPDATE pedido SET data = ?, status = ?, descricao = ?, tipo = ?, preco = ?, id_cliente = ?, id_funcionario = ?, composicao = ? WHERE id = ?";
                 try {
@@ -325,11 +339,11 @@ public class Pedidodao {
                     ps.setString(3, pedido.getDescricao());
                     ps.setInt(4, pedido.getTipo());
                     ps.setDouble(5, pedido.getPreco());
-                    ps.setInt(6, pedido.getIdCliente());
-                    ps.setInt(7, pedido.getIdFuncionario());
-                    produtos = String.valueOf(pedido.getComposicao().get(0));
+                    ps.setInt(6, pedido.getCliente().getId());
+                    ps.setInt(7, pedido.getFuncionario().getId());
+                    produtos = String.valueOf(pedido.getComposicao().get(0).getId());
                     for(int i = 1; i < pedido.getComposicao().size(); i++) {
-                        produtos = produtos + "," + String.valueOf(pedido.getComposicao().get(i));
+                        produtos = produtos + "," + String.valueOf(pedido.getComposicao().get(i).getId());
                     }
                     ps.setString(8, produtos);
                     ps.setInt(9, pedido.getId());
@@ -350,11 +364,11 @@ public class Pedidodao {
             ps.setString(3, pedido.getDescricao());
             ps.setInt(4, pedido.getTipo());
             ps.setDouble(5, pedido.getPreco());
-            ps.setInt(6, pedido.getIdCliente());
-            ps.setInt(7, pedido.getIdFuncionario());
-            produtos = String.valueOf(pedido.getComposicao().get(0));
+            ps.setInt(6, pedido.getCliente().getId());
+            ps.setInt(7, pedido.getFuncionario().getId());
+            produtos = String.valueOf(pedido.getComposicao().get(0).getId());
             for(int i = 1; i < pedido.getComposicao().size(); i++) {
-                produtos = produtos + "," + String.valueOf(pedido.getComposicao().get(i));
+                produtos = produtos + "," + String.valueOf(pedido.getComposicao().get(i).getId());
             }
             ps.setString(8, produtos);
             ps.setInt(9, pedido.getId());
