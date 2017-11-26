@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import br.com.pizzariatreze.dto.ClienteDto;
+import br.com.pizzariatreze.model.Cliente;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDao {
     
@@ -163,5 +165,9 @@ public class ClienteDao {
         }
         
         return result;
+    }
+
+    public List<Object> search(ClienteDto cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
