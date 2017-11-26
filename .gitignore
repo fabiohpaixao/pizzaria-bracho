@@ -1,6 +1,6 @@
-/nbproject/
+nbproject/
 manifest.mf
 build.xml
-/build/
-/dist/
+build/
+dist/
 *.class
