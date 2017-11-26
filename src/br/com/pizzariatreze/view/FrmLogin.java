@@ -1,12 +1,7 @@
 package br.com.pizzariatreze.view;
 
 import br.com.pizzariatreze.controller.LoginController;
-import br.com.pizzariatreze.util.Util;
 
-/**
- *
- * @author Gabriel
- */
 public class FrmLogin extends javax.swing.JFrame {
 
     public FrmLogin() {
