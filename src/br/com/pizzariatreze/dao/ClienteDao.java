@@ -149,15 +149,13 @@ public class ClienteDao {
         }
         
         try {
-            query = cliente.getId() != 0 ? "INSERT INTO cliente(nome, telefone, cpf, endereco, id) VALUES (?,?,?,?,?)" : "INSERT INTO cliente(nome, telefone, cpf, endereco) VALUES (?,?,?,?)";
+            query = "INSERT INTO cliente(nome, telefone, cpf, endereco) VALUES (?,?,?,?)";
             ps = Conexao.getConexao().prepareStatement(query);
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getTelefone());
             ps.setString(3, cliente.getCpf());
             ps.setString(4, cliente.getEndereco());
-            if(cliente.getId() != 0) {
-                ps.setInt(5, cliente.getId());
-            }
+    
             ps.executeUpdate();
             result = "Cliente criado com sucesso.";
         } catch (SQLException ex) {

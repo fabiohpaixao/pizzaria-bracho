@@ -26,15 +26,14 @@ public class Cliente extends Pessoa {
     public String save(Map cliente) {
         String result = null;
         ClienteDao clienteDao = new ClienteDao();
+        ClienteDto clienteDto = new ClienteDto();
 
-        int idCliente = (int)cliente.get("id");
-        String nomeCliente = (String)cliente.get("nome");
-        String enderecoCliente = (String)cliente.get("endereco");
-        String telefoneCliente = (String)cliente.get("telefone");
-        String cpfCliente = (String)cliente.get("cpf");
-        
-        ClienteDto clienteDto = new ClienteDto(idCliente,nomeCliente,enderecoCliente,telefoneCliente,cpfCliente);
-        
+        if(cliente.containsKey("id")) clienteDto.setId((int)cliente.get("id"));
+        if(cliente.containsKey("nome")) clienteDto.setNome((String)cliente.get("nome"));
+        if(cliente.containsKey("endereco")) clienteDto.setEndereco((String)cliente.get("endereco"));
+        if(cliente.containsKey("telefone")) clienteDto.setTelefone((String)cliente.get("telefone"));
+        if(cliente.containsKey("cpf")) clienteDto.setCpf(cliente.get("cpf").toString().replaceAll("[\\.\\-]", ""));
+ 
         result = clienteDao.save(clienteDto);
         return result;
     }    

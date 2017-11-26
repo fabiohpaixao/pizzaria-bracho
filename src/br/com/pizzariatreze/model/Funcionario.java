@@ -75,7 +75,7 @@ public class Funcionario extends Pessoa {
         
         char[] chars = senha;
         String password = String.valueOf(chars);
-        String cpfLimpo = usuario.replace(".", "").replace("-", "");
+        String cpfLimpo = usuario.replaceAll("[\\.\\-]", "");
         String senhaCript = Util.criptografar(password);
         funcionario.setCpf(cpfLimpo);
         funcionario.setSenha(senhaCript);
