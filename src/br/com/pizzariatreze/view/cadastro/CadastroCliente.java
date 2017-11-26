@@ -201,7 +201,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         cliente.put("endereco", txtEndereco.getText());
         cliente.put("cpf", txtCPF.getText());
         
-        String resposta = clienteCtrl.save(cliente);
+        String resposta = clienteCtrl.save(cliente) ? "Cliente cadastrado com sucesso." : "Erro ao cadastrar cliente.";
         
         JOptionPane.showMessageDialog(null, resposta);
     }//GEN-LAST:event_jButton1ActionPerformed

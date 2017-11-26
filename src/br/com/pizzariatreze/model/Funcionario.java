@@ -51,20 +51,8 @@ public class Funcionario extends Pessoa {
     }
     
     public boolean cadastrarCliente(ClienteDto cli) {
-        boolean result = false;
-        String tentativa = null;
         ClienteDao clienteDao = new ClienteDao(); 
-        
-        try {
-            tentativa = clienteDao.save(cli);
-            if (tentativa == "Cliente criado com sucesso." || tentativa == "Cliente atualizado com sucesso.") {
-                result = true;
-            }
-        } catch(Exception e) {
-            result = false;
-        }
-        
-        return result;
+        return clienteDao.save(cli);
     }
 
     public boolean login(String usuario, char[] senha) {

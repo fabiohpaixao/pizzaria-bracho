@@ -24,8 +24,7 @@ public class Cliente extends Pessoa {
         return result;
     }
     
-    public String save(Map cliente) {
-        String result = null;
+    public boolean save(Map cliente) {
         ClienteDao clienteDao = new ClienteDao();
         ClienteDto clienteDto = new ClienteDto();
 
@@ -35,8 +34,7 @@ public class Cliente extends Pessoa {
         if(cliente.containsKey("telefone")) clienteDto.setTelefone((String)cliente.get("telefone"));
         if(cliente.containsKey("cpf")) clienteDto.setCpf(cliente.get("cpf").toString().replaceAll("[\\.\\-]", ""));
  
-        result = clienteDao.save(clienteDto);
-        return result;
+        return clienteDao.save(clienteDto);
     }    
 
     public List<Object> listar(String telefone) {
