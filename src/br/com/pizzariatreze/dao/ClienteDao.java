@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import br.com.pizzariatreze.dto.ClienteDto;
-import br.com.pizzariatreze.dto.FuncionarioDto;
 import java.util.ArrayList;
 import java.util.List;
 
