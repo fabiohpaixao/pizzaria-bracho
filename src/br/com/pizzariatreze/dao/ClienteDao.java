@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ClienteDao {
     
-    private ArrayList<ClienteDto> clientes = null;
+    private ArrayList<ClienteDto> clientes = new ArrayList<>();
     private ClienteDto cliente = null;
     private Connection con = null;
     
@@ -219,20 +219,18 @@ public class ClienteDao {
 
             ResultSet rs = ps.executeQuery();
 
-            if(!rs.next()) {
-                return clientesObj;
+            if(rs.next()) {
+                do {
+                    this.cliente = new ClienteDto();
+                    this.cliente.setId(rs.getInt("id"));
+                    this.cliente.setTelefone(rs.getString("telefone"));
+                    this.cliente.setNome(rs.getString("nome"));
+                    this.cliente.setEndereco(rs.getString("endereco"));
+                    this.cliente.setCpf(rs.getString("cpf"));
+                    this.clientes.add(this.cliente);
+                    clientesObj.add((Object)this.cliente);
+                } while (rs.next());
             }
-
-            do {
-                this.cliente = new ClienteDto();
-                this.cliente.setId(rs.getInt("id"));
-                this.cliente.setTelefone(rs.getString("telefone"));
-                this.cliente.setNome(rs.getString("nome"));
-                this.cliente.setEndereco(rs.getString("endereco"));
-                this.cliente.setCpf(rs.getString("cpf"));
-                this.clientes.add(this.cliente);
-                clientesObj.add((Object)this.cliente);
-            } while (rs.next());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
