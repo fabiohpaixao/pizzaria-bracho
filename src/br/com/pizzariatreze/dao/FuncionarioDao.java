@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FuncionarioDao {
     
-    private ArrayList<FuncionarioDto> funcionarios = null;
+    private ArrayList<FuncionarioDto> funcionarios = new ArrayList<FuncionarioDto>();
     private FuncionarioDto funcionario = null;
     private Connection con = null;
     

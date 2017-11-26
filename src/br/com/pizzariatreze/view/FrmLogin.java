@@ -1,6 +1,7 @@
 package br.com.pizzariatreze.view;
 
 import br.com.pizzariatreze.controller.LoginController;
+import br.com.pizzariatreze.util.Util;
 
 /**
  *
@@ -125,7 +126,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jButtonCancelar)
                 .addContainerGap())
         );
@@ -141,7 +142,7 @@ public class FrmLogin extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(413, 277));
+        setSize(new java.awt.Dimension(413, 283));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
