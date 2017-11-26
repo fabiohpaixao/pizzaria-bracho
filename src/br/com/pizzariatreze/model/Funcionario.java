@@ -69,13 +69,16 @@ public class Funcionario extends Pessoa {
         return result;
     }
 
-    public boolean login(String usuario, String senha) {
+    public boolean login(String usuario, char[] senha) {
         
         FuncionarioDto funcionario = new FuncionarioDto();
         
-        String senhaMD5 = Util.criptografar(senha);
-        funcionario.setCpf(usuario);
-        funcionario.setSenha(senhaMD5);
+        char[] chars = senha;
+        String password = String.valueOf(chars);
+        String cpfLimpo = usuario.replace(".", "").replace("-", "");
+        String senhaCript = Util.criptografar(password);
+        funcionario.setCpf(cpfLimpo);
+        funcionario.setSenha(senhaCript);
         
         FuncionarioDao func = new FuncionarioDao();
         

@@ -22,6 +22,12 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("###.###.###-##");
+            txtLogin = new javax.swing.JFormattedTextField(data);
+        }
+        catch (Exception e){
+        }
         jLabel3 = new javax.swing.JLabel();
         jButtonLogar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -50,7 +56,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Login:");
 
-        txtLogin.setToolTipText("Insira seu nick de login.");
+        txtLogin.setToolTipText("Insira seu CPF.");
 
         jLabel3.setText("Senha:");
 
@@ -142,9 +148,8 @@ public class FrmLogin extends javax.swing.JFrame {
     private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
         // TODO add your handling code here:
         LoginController login = new LoginController();
-        char[] chars = txtSenha.getPassword();  
-        String password = String.valueOf(chars);  
-        if(login.logar(txtLogin.getText(), password)){
+       
+        if(login.logar(txtLogin.getText(), txtSenha.getPassword())){
             TelaInicial inicio = new TelaInicial();
             this.setVisible(false);
             inicio.setVisible(true);
