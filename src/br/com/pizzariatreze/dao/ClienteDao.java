@@ -125,8 +125,7 @@ public class ClienteDao {
         }
     }
     
-    public String save(ClienteDto cliente) {
-        String result = "Erro ao inserir/atualizar o cliente";
+    public boolean save(ClienteDto cliente) {
         String query = null;
         PreparedStatement ps = null;
         
@@ -143,9 +142,11 @@ public class ClienteDao {
                     ps.setInt(5, cliente.getId());
                     ps.executeUpdate();
                     
-                    return "Cliente atualizado com sucesso.";
+                    return true;
                 } catch (SQLException ex) {
-                    return "Erro ao atualizar cliente: " + ex.getMessage();
+                    //criar log
+                    //"Erro ao atualizar cliente: " + ex.getMessage();
+                    return false;
                 }
             }
         }
@@ -159,12 +160,12 @@ public class ClienteDao {
             ps.setString(4, cliente.getEndereco());
     
             ps.executeUpdate();
-            result = "Cliente criado com sucesso.";
+            return true;
         } catch (SQLException ex) {
-            return "Erro ao inserir cliente: " + ex.getMessage();
-        }
-        
-        return result;
+            //criar log
+            //"Erro ao inserir cliente: " + ex.getMessage();
+            return false;
+        }        
     }
 
     public List<Object> search(ClienteDto cliente) {
