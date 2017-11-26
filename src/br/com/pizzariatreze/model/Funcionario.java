@@ -34,8 +34,7 @@ public class Funcionario extends Pessoa {
         return result;
     }
     
-    public String save(Map funcionario) {
-        String result = null;
+    public boolean save(Map funcionario) {
         FuncionarioDao funcionarioDao = new FuncionarioDao();
                 
         int idFuncionario = (int)funcionario.get("id");
@@ -48,8 +47,7 @@ public class Funcionario extends Pessoa {
         
         FuncionarioDto funcionarioDto = new FuncionarioDto(idFuncionario,nomeFuncionario,enderecoFuncionario,telefoneFuncionario,cpfFuncionario,salarioFuncionario,cargoFuncionario);
         
-        result = funcionarioDao.save(funcionarioDto);
-        return result;
+        return funcionarioDao.save(funcionarioDto);
     }
     
     public boolean cadastrarCliente(ClienteDto cli) {
