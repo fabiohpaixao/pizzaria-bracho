@@ -52,5 +52,9 @@ public class MesaDto {
     public void setQtdLugares(int qtdLugares) {
         this.qtdLugares = qtdLugares;
     }
+
+    public Object getStatus() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
         
 }
