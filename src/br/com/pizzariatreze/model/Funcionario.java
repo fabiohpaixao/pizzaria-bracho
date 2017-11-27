@@ -7,6 +7,7 @@ import br.com.pizzariatreze.dto.FuncionarioDto;
 import br.com.pizzariatreze.util.Util;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Funcionario extends Pessoa {
 
@@ -72,6 +73,35 @@ public class Funcionario extends Pessoa {
             return true;
         
         return false;
+    }
+
+    public List<Object> listar(int id) {
+        /* Criação do modelo */
+        FuncionarioDto funcionario = new FuncionarioDto();
+
+        if(id > 0)
+            funcionario.setId(id);
+
+        /* Criação do DAO */
+        FuncionarioDao ddao = new FuncionarioDao();
+        List<Object> lista;
+        lista = ddao.search(funcionario);
+
+        return lista;
+            
+    }
+    
+    public List<Object> listar() {
+        /* Criação do modelo */
+        FuncionarioDto funcionario = new FuncionarioDto();
+
+        /* Criação do DAO */
+        FuncionarioDao ddao = new FuncionarioDao();
+        List<Object> lista;
+        lista = ddao.search(funcionario);
+
+        return lista;
+            
     }
 
 }
