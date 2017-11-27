@@ -5,7 +5,7 @@
  */
 package br.com.pizzariatreze.tablemodel;
 
-import br.com.pizzariatreze.dto.ClienteDto;
+import br.com.pizzariatreze.dto.EstoqueDto;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.table.AbstractTableModel;
@@ -70,18 +70,18 @@ public class EstoqueTableModel extends AbstractTableModel {
         linhas = new Vector();
 
         /* Percorre a lista copiando os dados para a tabela */
-        for (Object d : lista) {
-            ClienteDto cliente = new ClienteDto();
-            cliente = (ClienteDto) d;
-            /* Cria uma linha da tabela */
-            Vector<Object> linha = new Vector();
-            linha.add(cliente.getId());
-            linha.add(cliente.getNome());
-            linha.add(cliente.getTelefone());
-            linha.add(cliente.getEndereco());
-            /* Adiciona a linha a tabela */
-            linhas.add(linha);
-        }
+//        for (Object d : lista) {
+//            EstoqueDto estoque = new EstoqueDto();
+//            estoque = (EstoqueDto) d;
+//            /* Cria uma linha da tabela */
+//            Vector<Object> linha = new Vector();
+//            linha.add(estoque.getId());
+//            linha.add(estoque.getNome());
+//            linha.add(estoque.getTelefone());
+//            linha.add(estoque.getEndereco());
+//            /* Adiciona a linha a tabela */
+//            linhas.add(linha);
+//        }
 
         /* Atualiza a tabela */
         fireTableDataChanged();

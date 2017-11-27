@@ -7,6 +7,7 @@ package br.com.pizzariatreze.controller;
 
 import br.com.pizzariatreze.model.Funcionario;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -23,5 +24,10 @@ public class FuncionarioController {
         Funcionario funcionario = new Funcionario();
         return funcionario.listar();
     } 
+
+        public boolean save(Map mapFuncionario) {
+        Funcionario funcionario = new Funcionario();
+        return funcionario.save(mapFuncionario);
+    }
     
 }
