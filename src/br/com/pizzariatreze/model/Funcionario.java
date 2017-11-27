@@ -1,8 +1,6 @@
 package br.com.pizzariatreze.model;
 
 import br.com.pizzariatreze.dao.FuncionarioDao;
-import br.com.pizzariatreze.dao.FuncionarioDao;
-import br.com.pizzariatreze.dto.FuncionarioDto;
 import br.com.pizzariatreze.dto.FuncionarioDto;
 import br.com.pizzariatreze.util.Util;
 import java.util.Map;
