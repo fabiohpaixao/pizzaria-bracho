@@ -25,7 +25,7 @@ public class MesaDto {
         
         this.alterado = new ArrayList<>();
         this.alterado.add("id");
-        this.alterado.add("nomero");
+        this.alterado.add("numero");
         this.alterado.add("qtdLugares");
         this.alterado.add("codReserva");
     }
@@ -36,6 +36,7 @@ public class MesaDto {
 
     public void setCodReserva(int codReserva) {
         this.codReserva.add(codReserva);
+        if(!this.alterado.contains("codReserva")) this.alterado.add("codReserva");
     }
     
     public int getNumero() {
@@ -75,5 +76,4 @@ public class MesaDto {
     public List getAlterado() {
         return this.alterado;
     }
-        
 }

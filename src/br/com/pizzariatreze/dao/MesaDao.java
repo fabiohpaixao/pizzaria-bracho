@@ -144,6 +144,7 @@ public class MesaDao {
         PreparedStatement ps = null;
         String reservas = null;
         String[] reservasSplit = null;
+        boolean codPresente = false;
         
         try {
             con = Conexao.getConexao();
@@ -165,7 +166,16 @@ public class MesaDao {
                 for (int i = 0; i < reservasSplit.length; i++) {
                     this.mesa.setCodReserva(Integer.parseInt(reservasSplit[i]));
                 }
-                this.mesas.add(this.mesa);
+                
+                for (int j = 0; j < this.mesa.getCodReserva().size(); j++) {
+                    if(this.mesa.getCodReserva().get(j) == codigo) {
+                        codPresente = true;
+                    }
+                }
+                
+                if(codPresente) {
+                    this.mesas.add(this.mesa);
+                }
                 return this.mesas;
             } while (rs.next());
         } catch (SQLException e) {
@@ -232,11 +242,12 @@ public class MesaDao {
         
         return result;
     }
-
+    
     public List<Object> search(MesaDto mesa) {
- 
-        List<Object> mesasObj = new ArrayList<>();
         
+        List<Object> mesasObj = new ArrayList<>();
+        this.mesa = null;
+
         try{
             con = Conexao.getConexao();
             String sql = "SELECT * FROM mesa";
