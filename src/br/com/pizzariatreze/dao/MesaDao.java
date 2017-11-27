@@ -264,7 +264,15 @@ public class MesaDao {
 
                 if(alt.contains("reservas")){
                     sqlWhere += " AND reservas = ? ";
-                    parametros.add(mesa.getCodReserva());
+                    ArrayList<Integer> reservas = mesa.getCodReserva();
+                    String strReservas = "";
+                    for(int res : reservas){
+                        strReservas += String.valueOf(res) + ",";
+                    }
+                    
+                    strReservas = strReservas.substring(-1);
+                    
+                    parametros.add(strReservas);
                 }
 
                 if(sqlWhere.length() > 0) sql += " WHERE 1=1 " + sqlWhere;
