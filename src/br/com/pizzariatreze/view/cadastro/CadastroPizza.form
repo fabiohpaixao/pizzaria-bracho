@@ -225,7 +225,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DefaultListModel model = new DefaultListModel();&#xd;&#xa;IngredienteController ingredientesCtrl = new IngredienteController();&#xd;&#xa;&#xd;&#xa;List&lt;Object&gt; ingredientes = ingredientesCtrl.listar();&#xd;&#xa;&#xd;&#xa;for(Object ing : ingredientes){&#xd;&#xa;    model.addElement(ing);&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;listAll.setModel(model);&#xd;&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DefaultListModel model = new DefaultListModel();&#xd;&#xa;IngredienteController ingredientesCtrl = new IngredienteController();&#xd;&#xa;&#xd;&#xa;List&lt;Object&gt; ingredientes = ingredientesCtrl.listar();&#xd;&#xa;&#xd;&#xa;for(Object ing : ingredientes){&#xd;&#xa;    IngredienteDto i = (IngredienteDto) ing;&#xd;&#xa;    model.addElement(i.getId() + &quot;-&quot; + i.getNome());&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;listAll.setModel(model);&#xd;&#xa;"/>
               </AuxValues>
             </Component>
           </SubComponents>

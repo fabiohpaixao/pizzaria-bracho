@@ -1,9 +1,11 @@
 package br.com.pizzariatreze.view.cadastro;
 
 import br.com.pizzariatreze.controller.IngredienteController;
+import br.com.pizzariatreze.dto.IngredienteDto;
 import br.com.pizzariatreze.view.TelaInicial;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 public class CadastroPizza extends javax.swing.JFrame {
 
@@ -36,17 +38,18 @@ public class CadastroPizza extends javax.swing.JFrame {
         jLabelVoltar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
+        listAll = new javax.swing.JList();
         DefaultListModel model = new DefaultListModel();
         IngredienteController ingredientesCtrl = new IngredienteController();
 
         List<Object> ingredientes = ingredientesCtrl.listar();
 
         for(Object ing : ingredientes){
-            model.addElement(ing);
+            IngredienteDto i = (IngredienteDto) ing;
+            model.addElement(i.getId() + "-" + i.getNome());
         }
 
         listAll.setModel(model);
-        listAll = new javax.swing.JList();
         jScrollPane7 = new javax.swing.JScrollPane();
         listAdd = new javax.swing.JList();
 
@@ -196,6 +199,12 @@ public class CadastroPizza extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         DefaultListModel model = new DefaultListModel();
         model.addElement(listAll.getSelectedValue());
+        
+        DefaultListModel modelRem = (DefaultListModel) listAll.getModel();
+        int selectedIndex = listAll.getSelectedIndex();
+        if (selectedIndex != -1) {
+            modelRem.remove(selectedIndex);
+        }
 
         listAdd.setModel(model);
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -203,6 +212,12 @@ public class CadastroPizza extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DefaultListModel model = new DefaultListModel();
         model.addElement(listAdd.getSelectedValue());
+           
+        DefaultListModel modelRem = (DefaultListModel) listAdd.getModel();
+        int selectedIndex = listAdd.getSelectedIndex();
+        if (selectedIndex != -1) {
+            modelRem.remove(selectedIndex);
+        }
 
         listAll.setModel(model);
     }//GEN-LAST:event_jButton1ActionPerformed
