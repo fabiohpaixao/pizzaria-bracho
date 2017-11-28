@@ -15,6 +15,7 @@ public class Ingrediente {
         if(ingrediente.containsKey("nome")) ingredienteDto.setNome((String)ingrediente.get("nome"));
         if(ingrediente.containsKey("descricao")) ingredienteDto.setDescricao((String)ingrediente.get("descricao"));
         if(ingrediente.containsKey("valor")) ingredienteDto.setValor(Double.parseDouble((String)ingrediente.get("valor")));
+        if(ingrediente.containsKey("quantidade")) ingredienteDto.setQuantidade(Integer.parseInt((String)ingrediente.get("quantidade")));
         
         return ingredienteDao.save(ingredienteDto);
     } 
