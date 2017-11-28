@@ -306,10 +306,14 @@ public class MesaDao {
                     this.mesa.setNumero(rs.getInt("numero"));
                     this.mesa.setQtdLugares(rs.getInt("qtd_lugares"));
                     String reservas = rs.getString("reservas");
-                    String[] reservasSplit = reservas.split(",");
-                    for (int i = 0; i < reservasSplit.length; i++) {
-                        this.mesa.setCodReserva(Integer.parseInt(reservasSplit[i]));
-                    }
+                   /* 
+                    if(reservas.length() > 1){
+                        String[] reservasSplit = reservas.split(",");
+                        for (int i = 0; i < reservasSplit.length; i++) {
+                            this.mesa.setCodReserva(Integer.parseInt(reservasSplit[i]));
+                        }
+                    }*/
+                    
                     mesasObj.add((Object)this.mesa);
                 } while (rs.next());
             }

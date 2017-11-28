@@ -76,6 +76,7 @@ public class MesaTableModel extends AbstractTableModel {
             Vector<Object> linha = new Vector();
             linha.add(mesa.getNumero());
             linha.add(mesa.getQtdLugares());
+            linha.add("Arrumar");
             /* Adiciona a linha a tabela */
             linhas.add(linha);
         }

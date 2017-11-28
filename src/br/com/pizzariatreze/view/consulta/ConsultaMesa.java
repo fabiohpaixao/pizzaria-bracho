@@ -189,17 +189,19 @@ public class ConsultaMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     public void atualizar(List<Object> lista) {
+ 
         try {
             /* Captura o modelo da tabela */
             MesaTableModel modelo = (MesaTableModel) jTableMesa.getModel();
-            
+
             /* Copia os dados da consulta para a tabela */
             modelo.adicionar(lista);
-
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao tentar buscar um Cliente");
         }
+
+
     }
     /**
      * @param args the command line arguments

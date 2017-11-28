@@ -1,5 +1,7 @@
 package br.com.pizzariatreze.dto;
 
+import java.util.List;
+
 public class IngredienteDto {
 
     private int id;
@@ -46,5 +48,9 @@ public class IngredienteDto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public List getAlterado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

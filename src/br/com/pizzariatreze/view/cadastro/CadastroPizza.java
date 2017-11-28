@@ -1,5 +1,6 @@
 package br.com.pizzariatreze.view.cadastro;
 
+import br.com.pizzariatreze.controller.IngredienteController;
 import br.com.pizzariatreze.view.TelaInicial;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -35,6 +36,16 @@ public class CadastroPizza extends javax.swing.JFrame {
         jLabelVoltar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
+        DefaultListModel model = new DefaultListModel();
+        IngredienteController ingredientesCtrl = new IngredienteController();
+
+        List<Object> ingredientes = ingredientesCtrl.listar();
+
+        for(Object ing : ingredientes){
+            model.addElement(ing);
+        }
+
+        listAll.setModel(model);
         listAll = new javax.swing.JList();
         jScrollPane7 = new javax.swing.JScrollPane();
         listAdd = new javax.swing.JList();

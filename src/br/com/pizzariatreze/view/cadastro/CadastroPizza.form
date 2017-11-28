@@ -224,6 +224,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DefaultListModel model = new DefaultListModel();&#xd;&#xa;IngredienteController ingredientesCtrl = new IngredienteController();&#xd;&#xa;&#xd;&#xa;List&lt;Object&gt; ingredientes = ingredientesCtrl.listar();&#xd;&#xa;&#xd;&#xa;for(Object ing : ingredientes){&#xd;&#xa;    model.addElement(ing);&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;listAll.setModel(model);&#xd;&#xa;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

@@ -2,6 +2,7 @@ package br.com.pizzariatreze.model;
 
 import br.com.pizzariatreze.dao.IngredienteDao;
 import br.com.pizzariatreze.dto.IngredienteDto;
+import java.util.List;
 import java.util.Map;
 
 public class Ingrediente {
@@ -17,5 +18,17 @@ public class Ingrediente {
         
         return ingredienteDao.save(ingredienteDto);
     } 
+    
+        public List<Object> listar() {
+        /* Criação do modelo */
+            IngredienteDto ingrediente = new IngredienteDto();
+ 
+            /* Criação do DAO */
+            IngredienteDao ddao = new IngredienteDao();
+            List<Object> lista;
+            lista = ddao.search(ingrediente);
+            
+            return lista;    
+    }
     
 }
