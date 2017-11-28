@@ -11,8 +11,9 @@ public class IngredienteController {
         return ingrediente.save(mapIngrediente);
     }
 
-    public List<Object> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+     public List<Object> listar() {
+        Ingrediente ingrediente = new Ingrediente();
+        return ingrediente.listar();
+    } 
     
 }

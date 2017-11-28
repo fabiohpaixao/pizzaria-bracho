@@ -11,9 +11,13 @@ import java.util.List;
 
 public class IngredienteDao {
     
-    private ArrayList<IngredienteDto> ingredientes = null;
-    private IngredienteDto ingrediente = null;
+    private ArrayList<IngredienteDto> ingredientes;
+    private IngredienteDto ingrediente;
     private Connection con = null;
+    
+    public IngredienteDao(){
+        this.ingredientes = new ArrayList<>();
+    }
     
     public IngredienteDto getById(int id) {
         this.ingrediente = null;
