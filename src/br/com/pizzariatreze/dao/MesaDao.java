@@ -310,7 +310,6 @@ public class MesaDao {
                     for (int i = 0; i < reservasSplit.length; i++) {
                         this.mesa.setCodReserva(Integer.parseInt(reservasSplit[i]));
                     }
-                    this.mesas.add(this.mesa);
                     mesasObj.add((Object)this.mesa);
                 } while (rs.next());
             }
