@@ -273,18 +273,18 @@ public class MesaDao {
                     parametros.add(mesa.getQtdLugares());
                 }
 
-                if(alt.contains("reservas")){
-                    sqlWhere += " AND reservas = ? ";
-                    ArrayList<Integer> reservas = mesa.getCodReserva();
-                    String strReservas = "";
-                    for(int res : reservas){
-                        strReservas += String.valueOf(res) + ",";
+                    if(alt.contains("reservas")){
+                        sqlWhere += " AND reservas = ? ";
+                        ArrayList<Integer> reservas = mesa.getCodReserva();
+                        String strReservas = "";
+                        for(int res : reservas){
+                            strReservas += String.valueOf(res) + ",";
+                        }
+
+                        strReservas = strReservas.substring(-1);
+
+                        parametros.add(strReservas);
                     }
-                    
-                    strReservas = strReservas.substring(-1);
-                    
-                    parametros.add(strReservas);
-                }
 
                 if(sqlWhere.length() > 0) sql += " WHERE 1=1 " + sqlWhere;
             }
