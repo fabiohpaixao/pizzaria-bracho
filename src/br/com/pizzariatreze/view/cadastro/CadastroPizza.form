@@ -243,6 +243,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DefaultListModel modelAdd = new DefaultListModel();&#xa;listAdd.setModel(modelAdd);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

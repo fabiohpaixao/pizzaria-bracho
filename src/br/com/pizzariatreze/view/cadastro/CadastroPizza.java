@@ -3,6 +3,7 @@ package br.com.pizzariatreze.view.cadastro;
 import br.com.pizzariatreze.controller.IngredienteController;
 import br.com.pizzariatreze.dto.IngredienteDto;
 import br.com.pizzariatreze.view.TelaInicial;
+import br.com.pizzariatreze.view.TelaPedido;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
@@ -52,6 +53,8 @@ public class CadastroPizza extends javax.swing.JFrame {
         listAll.setModel(model);
         jScrollPane7 = new javax.swing.JScrollPane();
         listAdd = new javax.swing.JList();
+        DefaultListModel modelAdd = new DefaultListModel();
+        listAdd.setModel(modelAdd);
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -191,35 +194,26 @@ public class CadastroPizza extends javax.swing.JFrame {
 
     private void jLabelVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVoltarMouseClicked
         // TODO add your handling code here:
-        TelaInicial ti = new TelaInicial();
+        TelaPedido ti = new TelaPedido();
         ti.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabelVoltarMouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        DefaultListModel model = new DefaultListModel();
-        model.addElement(listAll.getSelectedValue());
-        
-        DefaultListModel modelRem = (DefaultListModel) listAll.getModel();
-        int selectedIndex = listAll.getSelectedIndex();
-        if (selectedIndex != -1) {
-            modelRem.remove(selectedIndex);
+       
+        for (Object o : listAll.getSelectedValuesList())
+        {
+            ((DefaultListModel<String>)listAdd.getModel()).addElement((String)o);
+            ((DefaultListModel<String>)listAll.getModel()).removeElement((String)o);
         }
-
-        listAdd.setModel(model);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DefaultListModel model = new DefaultListModel();
-        model.addElement(listAdd.getSelectedValue());
-           
-        DefaultListModel modelRem = (DefaultListModel) listAdd.getModel();
-        int selectedIndex = listAdd.getSelectedIndex();
-        if (selectedIndex != -1) {
-            modelRem.remove(selectedIndex);
+        for (Object o : listAdd.getSelectedValuesList())
+        {
+            ((DefaultListModel<String>)listAll.getModel()).addElement((String)o);
+            ((DefaultListModel<String>)listAdd.getModel()).removeElement((String)o);
         }
-
-        listAll.setModel(model);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
