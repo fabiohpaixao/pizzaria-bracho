@@ -42,7 +42,7 @@ public class Funcionario extends Pessoa {
         if(funcionario.containsKey("endereco")) funcionarioDto.setEndereco((String)funcionario.get("endereco"));
         if(funcionario.containsKey("telefone")) funcionarioDto.setTelefone((String)funcionario.get("telefone"));
         if(funcionario.containsKey("cpf")) funcionarioDto.setCpf(funcionario.get("cpf").toString().replaceAll("[\\.\\-]", ""));
-        if(funcionario.containsKey("salario")) funcionarioDto.setSalario((double)funcionario.get("salario"));
+        if(funcionario.containsKey("salario")) funcionarioDto.setSalario(Double.parseDouble((String)funcionario.get("salario")));
         if(funcionario.containsKey("cargo")) funcionarioDto.setCargo((String)funcionario.get("cargo"));
         if(funcionario.containsKey("senha")) funcionarioDto.setCargo((String)funcionario.get("senha"));
         return funcionarioDao.save(funcionarioDto);
