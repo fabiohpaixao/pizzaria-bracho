@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ClienteController {
 
-    public boolean save(Map mapCliente) {
+    public boolean save(Map mapCliente) throws Exception {
         Cliente cliente = new Cliente();
         return cliente.save(mapCliente);
     }
