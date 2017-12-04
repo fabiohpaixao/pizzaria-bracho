@@ -16,7 +16,7 @@ public class FuncionarioController {
         return funcionario.listar();
     } 
 
-        public boolean save(Map mapFuncionario) {
+        public boolean save(Map mapFuncionario) throws Exception{
         Funcionario funcionario = new Funcionario();
         return funcionario.save(mapFuncionario);
     }

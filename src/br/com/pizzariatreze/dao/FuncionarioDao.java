@@ -254,6 +254,7 @@ public class FuncionarioDao {
                     this.funcionario.setSalario(rs.getDouble("salario"));
                     this.funcionario.setCpf(rs.getString("cpf"));
                     this.funcionario.setCargo(rs.getString("cargo"));                
+                    this.funcionario.setSenha(rs.getString("senha"));                
                     this.funcionarios.add(this.funcionario);
                     funcionariosObj.add((Object)this.funcionario);
                 } while (rs.next());
