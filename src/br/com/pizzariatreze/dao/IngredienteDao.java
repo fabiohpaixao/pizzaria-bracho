@@ -152,6 +152,7 @@ public class IngredienteDao {
                 } catch (SQLException ex) {
                     //criar log
                     //"Erro ao atualizar ingrediente: " + ex.getMessage();
+                    ex.printStackTrace();
                     return false;
                 }
             }
@@ -172,6 +173,7 @@ public class IngredienteDao {
         } catch (SQLException ex) {
             //criar log
             //"Erro ao inserir ingrediente: " + ex.getMessage();
+            ex.printStackTrace();
             return false;
         }
     }

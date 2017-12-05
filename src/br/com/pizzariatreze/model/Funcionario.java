@@ -69,13 +69,13 @@ public class Funcionario extends Pessoa {
             }
             
             double salario;
-            
+
             try {
                 salario = Double.parseDouble(funcionario.get("salario").toString().trim());
             } catch (Exception e) {
                 throw new Exception("Salario deve ser um valor numérico.");
             }
-
+            
             funcionarioDto.setSalario(salario);
         }
         

@@ -26,7 +26,7 @@ public class Ingrediente {
             if (ingrediente.get("descricao").toString().trim().isEmpty()) {
                 throw new Exception("Descricao deve estar preenchida.");
             }
-            ingredienteDto.setNome(ingrediente.get("nome").toString().trim());
+            ingredienteDto.setDescricao(ingrediente.get("descricao").toString().trim());
         }
         
         if(ingrediente.containsKey("valor")) {
@@ -50,11 +50,19 @@ public class Ingrediente {
                 throw new Exception("Quantidade deve estar preenchido.");
             }
             
-            if(Integer.parseInt(ingrediente.get("valor").toString().trim()) <= 0) {
-                throw new Exception("Valor deve ser numérico e positivo.");
+            int qtd;
+            
+            try {
+                qtd = Integer.parseInt(ingrediente.get("quantidade").toString().trim());
+            } catch (Exception e) {
+                throw new Exception("Valor deve ser numérico.");
             }
             
-            ingredienteDto.setQuantidade(Integer.parseInt((String)ingrediente.get("quantidade")));
+            if(qtd <= 0) {
+                throw new Exception("Quantidade deve ser um numero positivo.");
+            }
+            
+            ingredienteDto.setQuantidade(qtd);
         }
         
         return ingredienteDao.save(ingredienteDto);
