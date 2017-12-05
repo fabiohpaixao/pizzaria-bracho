@@ -1,0 +1,20 @@
+1) Fake sessão: Guardar o usuario logado, talvez mostrar o nome e um link "sair" no topo de todas as views. 
+Também mostrar apenas as opções permitidas para determinado cargo.
+
+2) Cadastro de produtos: Está dando exception.
+
+3) Consulta de mesas: tablemodel com dados e indices errados, busca não funciona.
+
+4) Consulta de ingredientes: não funciona nada.
+
+5) Reservas: Precisa ter uma lista de mesas disponíveis na data com a quantidade de lugares de cada mesa para
+que possamos selecionar quais mesas farão parte desta reserva.
+
+6) Pedidos: Falta o core principal de pedido e cadastro de nova pizza com verificação se a configuração de
+montagem da pizza já existe na base.
+
+7) Criar os deletes e alters dos itens(produto, funcionario, cliente, ingrediente, mesa)
+
+8) Testes: Testes dos models e Daos(usados).
+
+9) Remoções: Remover "excesso" de código não usado.
