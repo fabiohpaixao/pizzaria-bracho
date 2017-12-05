@@ -33,6 +33,12 @@ public class ConsultaCliente extends javax.swing.JFrame {
         jLabelVoltar = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("(##) #####-####");
+            txtTelefone = new javax.swing.JFormattedTextField(data);
+        }
+        catch (Exception e){
+        }
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
