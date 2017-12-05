@@ -264,7 +264,7 @@ public class MesaDao {
                 int index = 1;
 
                 if(alt.contains("numero")) {
-                    sqlWhere += " AND nome = ? ";
+                    sqlWhere += " AND numero = ? ";
                     parametros.add(mesa.getNumero());
                 }
 

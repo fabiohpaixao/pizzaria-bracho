@@ -3,9 +3,8 @@ Também mostrar apenas as opções permitidas para determinado cargo. - Pendente
 
 2) Cadastro de produtos: Está dando exception.
 
-3) Consulta de mesas: tablemodel com dados e indices errados, busca não funciona.
-
 4) Consulta de ingredientes: não funciona nada.
+
 
 5) Reservas: Precisa ter uma lista de mesas disponíveis na data com a quantidade de lugares de cada mesa para
 que possamos selecionar quais mesas farão parte desta reserva.
