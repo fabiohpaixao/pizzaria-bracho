@@ -17,7 +17,7 @@ public class Ingrediente {
         
         if(ingrediente.containsKey("nome")) {
             if (ingrediente.get("nome").toString().trim().isEmpty()) {
-                throw new Exception("Ingrediente deve estar preenchido.");
+                throw new Exception("Nome do ingrediente deve estar preenchido.");
             }
             ingredienteDto.setNome(ingrediente.get("nome").toString().trim());
         }
@@ -34,11 +34,15 @@ public class Ingrediente {
                 throw new Exception("Valor deve estar preenchido.");
             }
             
-            if(Double.isNaN(Double.parseDouble(ingrediente.get("valor").toString().trim()))) {
+            double valor;
+            
+            try {
+                valor = Double.parseDouble(ingrediente.get("valor").toString().trim());
+            } catch (Exception e) {
                 throw new Exception("Valor deve ser numérico.");
             }
-            
-            ingredienteDto.setValor(Double.parseDouble(ingrediente.get("valor").toString().trim()));
+                        
+            ingredienteDto.setValor(valor);
         }
         
         if(ingrediente.containsKey("quantidade")) {

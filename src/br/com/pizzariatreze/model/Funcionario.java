@@ -68,11 +68,15 @@ public class Funcionario extends Pessoa {
                 throw new Exception("Salario deve estar preenchido.");
             }
             
-            if(Double.isNaN(Double.parseDouble(funcionario.get("salario").toString().trim()))) {
+            double salario;
+            
+            try {
+                salario = Double.parseDouble(funcionario.get("salario").toString().trim());
+            } catch (Exception e) {
                 throw new Exception("Salario deve ser um valor numérico.");
             }
-            
-            funcionarioDto.setSalario(Double.parseDouble(funcionario.get("salario").toString().trim()));
+
+            funcionarioDto.setSalario(salario);
         }
         
         if(funcionario.containsKey("cargo")) {
