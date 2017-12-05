@@ -119,6 +119,7 @@ public class Funcionario extends Pessoa {
                 FuncionarioDto funcionarioBD = new FuncionarioDto();
                 funcionarioBD = (FuncionarioDto) f;
                 if(funcionarioBD.getCpf().replaceAll("[\\.\\-]", "").equals(cpfLimpo) && funcionarioBD.getSenha().equals(senhaCript)) {
+                    System.setProperty("id_usuario_logado", String.valueOf(funcionarioBD.getId()));
                     return true;
                 }
             }

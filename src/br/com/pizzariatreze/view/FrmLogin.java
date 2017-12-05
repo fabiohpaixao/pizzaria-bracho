@@ -132,7 +132,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
         // TODO add your handling code here:
         LoginController login = new LoginController();
-       
+        
         if(login.logar(txtLogin.getText(), txtSenha.getPassword())){
             TelaInicial inicio = new TelaInicial();
             this.setVisible(false);

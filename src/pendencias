@@ -1,5 +1,5 @@
-1) Fake sessão: Guardar o usuario logado, talvez mostrar o nome e um link "sair" no topo de todas as views. 
-Também mostrar apenas as opções permitidas para determinado cargo.
+1) Fake sessão: Guardar o usuario logado, talvez mostrar o nome e um link "sair" no topo de todas as views. - Feito
+Também mostrar apenas as opções permitidas para determinado cargo. - Pendente
 
 2) Cadastro de produtos: Está dando exception.
 
