@@ -68,7 +68,7 @@ public class Ingrediente {
         return ingredienteDao.save(ingredienteDto);
     } 
     
-        public List<Object> listar() {
+    public List<Object> listar() {
         /* Criação do modelo */
             IngredienteDto ingrediente = new IngredienteDto();
  
@@ -80,4 +80,20 @@ public class Ingrediente {
             return lista;    
     }
     
+        public List<Object> listar(String id) {
+        /* Criação do modelo */
+            IngredienteDto ingrediente = new IngredienteDto();
+            
+            if(id.length() > 0)
+                ingrediente.setId(Integer.parseInt(id));
+
+            /* Criação do DAO */
+            IngredienteDao ddao = new IngredienteDao();
+            List<Object> lista;
+            lista = ddao.search(ingrediente);
+            
+            return lista;
+            
+    }
+
 }

@@ -15,5 +15,10 @@ public class IngredienteController {
         Ingrediente ingrediente = new Ingrediente();
         return ingrediente.listar();
     } 
+
+    public List<Object> listar(String id) {
+        Ingrediente ingrediente = new Ingrediente();
+        return ingrediente.listar(id);
+    }
     
 }
