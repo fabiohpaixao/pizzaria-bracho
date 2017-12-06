@@ -141,6 +141,8 @@ ALTER TABLE `mesa` ADD COLUMN `reservas` TEXT NULL;
 
 ALTER TABLE `reserva` ADD COLUMN `nome` VARCHAR(255) NOT NULL;
 
-ALTER TABLE `produto` ADD COLUMN `descricao` VarChar(255) NULL;
+ALTER TABLE `produto` ADD COLUMN `descricao` VARCHAR(255) NULL;
+
+ALTER TABLE `produto` MODIFY `composicao` VARCHAR(511) NULL;
 
 SET FOREIGN_KEY_CHECKS=1; #after your delete
