@@ -207,11 +207,16 @@ public class ProdutoDao {
                     ps = Conexao.getConexao().prepareStatement(query);
                     ps.setString(1, produto.getNome());
                     ps.setDouble(2, produto.getPreco());
-                    ingredientes = String.valueOf(produto.getComposicao().get(0).getId());
-                    for(int i = 1; i < produto.getComposicao().size(); i++) {
-                        ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
+                    if(produto.getComposicao() != null){
+                        ingredientes = String.valueOf(produto.getComposicao().get(0).getId());
+                        for(int i = 1; i < produto.getComposicao().size(); i++) {
+                            ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
+                        }
+                        ps.setString(3, ingredientes);
+                    }else{
+                        ps.setString(3, "");
                     }
-                    ps.setString(3, ingredientes);
+
                     ps.setInt(4, produto.getId());
                     ps.executeUpdate();
                     
@@ -225,23 +230,26 @@ public class ProdutoDao {
         }
         
         try {
-            query = produto.getId() != 0 ? "INSERT INTO produto(nome, preco, descricao, composicao, id) VALUES (?,?,?,?,?)" : "INSERT INTO cliente(nome, preco, descricao, composicao) VALUES (?,?,?,?)";
+            query = "INSERT INTO produto(nome, preco, descricao, composicao) VALUES (?,?,?,?)";
             ps = Conexao.getConexao().prepareStatement(query);
             ps.setString(1, produto.getNome());
             ps.setDouble(2, produto.getPreco());
             ps.setString(3, produto.getDescricao());
-            ingredientes = String.valueOf(produto.getComposicao().get(0).getId());
-            for(int i = 1; i < produto.getComposicao().size(); i++) {
-                ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
+            if(produto.getComposicao() != null){
+                ingredientes = String.valueOf(produto.getComposicao().get(0).getId());
+                for(int i = 1; i < produto.getComposicao().size(); i++) {
+                    ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
+                }
+                ps.setString(4, ingredientes);
+            }else{
+                ps.setString(4, "");
             }
-            ps.setString(4, ingredientes);
-            if(produto.getId() != 0) {
-                ps.setInt(5, produto.getId());
-            }
+            
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
             //criar log
+            System.out.println(ex.getMessage());
             //"Erro ao inserir produto: " + ex.getMessage();
             return false;
         }
