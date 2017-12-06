@@ -44,7 +44,6 @@ public class Produto {
             
             produtoDto.setPreco(preco);
         }
-        
         return produtoDao.save(produtoDto);
     }  
 

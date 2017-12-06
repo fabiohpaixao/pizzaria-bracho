@@ -207,23 +207,21 @@ public class ProdutoDao {
                     ps = Conexao.getConexao().prepareStatement(query);
                     ps.setString(1, produto.getNome());
                     ps.setDouble(2, produto.getPreco());
-                    if(produto.getComposicao() != null){
+                    ps.setString(3, produto.getDescricao());
+                    ingredientes = "";
+                    if(produto.getComposicao() != null) {
                         ingredientes = String.valueOf(produto.getComposicao().get(0).getId());
                         for(int i = 1; i < produto.getComposicao().size(); i++) {
                             ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
                         }
-                        ps.setString(3, ingredientes);
-                    }else{
-                        ps.setString(3, "");
                     }
-
-                    ps.setInt(4, produto.getId());
+                    ps.setString(4, ingredientes);
+                    ps.setInt(5, produto.getId());
                     ps.executeUpdate();
                     
                     return true;
                 } catch (SQLException ex) {
-                    //criar log
-                    //"Erro ao atualizar produto: " + ex.getMessage();
+                    ex.printStackTrace();
                     return false;
                 }
             }
@@ -235,22 +233,20 @@ public class ProdutoDao {
             ps.setString(1, produto.getNome());
             ps.setDouble(2, produto.getPreco());
             ps.setString(3, produto.getDescricao());
-            if(produto.getComposicao() != null){
+            
+            ingredientes = "";
+            if(produto.getComposicao() != null) {
                 ingredientes = String.valueOf(produto.getComposicao().get(0).getId());
                 for(int i = 1; i < produto.getComposicao().size(); i++) {
                     ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
                 }
-                ps.setString(4, ingredientes);
-            }else{
-                ps.setString(4, "");
             }
+            ps.setString(4, ingredientes);
             
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            //criar log
-            System.out.println(ex.getMessage());
-            //"Erro ao inserir produto: " + ex.getMessage();
+            ex.printStackTrace();
             return false;
         }
     }
