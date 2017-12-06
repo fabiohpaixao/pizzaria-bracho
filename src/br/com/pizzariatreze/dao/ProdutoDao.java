@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProdutoDao {
 
@@ -262,5 +263,9 @@ public class ProdutoDao {
             //"Erro ao excluir produto: " + ex.getMessage();
             return false;
         }
+    }
+
+    public Integer pesquisarPizza(List ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

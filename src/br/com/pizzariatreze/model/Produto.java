@@ -2,6 +2,7 @@ package br.com.pizzariatreze.model;
 
 import br.com.pizzariatreze.dao.ProdutoDao;
 import br.com.pizzariatreze.dto.ProdutoDto;
+import java.util.List;
 import java.util.Map;
 
 public class Produto {
@@ -17,5 +18,14 @@ public class Produto {
  
         return produtoDao.save(produtoDto);
     }  
+
+    public Integer savePizza(String nome, List ids) {
+        ProdutoDao produtoDao = new ProdutoDao();
+        ProdutoDto produtoDto = new ProdutoDto();
+        
+        Integer id = produtoDao.pesquisarPizza(ids);
+        
+        return 0;
+    }
 
 }
