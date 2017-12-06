@@ -7,15 +7,44 @@ import java.util.Map;
 
 public class Produto {
 
-    public boolean save(Map produto) {
+    public boolean save(Map produto) throws Exception {
         ProdutoDao produtoDao = new ProdutoDao();
         ProdutoDto produtoDto = new ProdutoDto();
 
-        if(produto.containsKey("id")) produtoDto.setId((int)produto.get("id"));
-        if(produto.containsKey("nome")) produtoDto.setNome((String)produto.get("nome"));
-        if(produto.containsKey("descricao")) produtoDto.setDescricao((String)produto.get("descricao"));
-        if(produto.containsKey("preco")) produtoDto.setPreco(Double.parseDouble((String)produto.get("preco")));
- 
+        if(produto.containsKey("id")) {
+            produtoDto.setId((int)produto.get("id"));
+        }
+        
+        if(produto.containsKey("nome")) {
+            if (produto.get("nome").toString().trim().isEmpty()) {
+                throw new Exception("Nome deve estar preenchido.");
+            }
+            produtoDto.setNome(produto.get("nome").toString().trim());
+        }
+        
+        if(produto.containsKey("descricao")) {
+            if (produto.get("descricao").toString().trim().isEmpty()) {
+                throw new Exception("Descricao deve estar preenchido.");
+            }
+            produtoDto.setDescricao(produto.get("descricao").toString().trim());
+        }
+        
+        if(produto.containsKey("preco")) {
+            if (produto.get("preco").toString().trim().isEmpty()) {
+                throw new Exception("Preco deve estar preenchido.");
+            }
+            
+            double preco;
+
+            try {
+                preco = Double.parseDouble(produto.get("preco").toString().trim());
+            } catch (Exception e) {
+                throw new Exception("Preco deve ser um valor numérico.");
+            }
+            
+            produtoDto.setPreco(preco);
+        }
+        
         return produtoDao.save(produtoDto);
     }  
 

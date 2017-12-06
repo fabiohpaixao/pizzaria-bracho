@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ProdutoController {
 
-    public boolean save(Map mapProduto) {
+    public boolean save(Map mapProduto) throws Exception {
         Produto produto = new Produto();
         return produto.save(mapProduto);
     }
