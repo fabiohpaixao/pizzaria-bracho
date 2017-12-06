@@ -1,21 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.pizzariatreze.view.consulta;
 
+import br.com.pizzariatreze.dto.FuncionarioDto;
 import br.com.pizzariatreze.view.TelaInicial;
+import br.com.pizzariatreze.util.Util;
 
-/**
- *
- * @author gabriel
- */
 public class TelaConsulta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaConsulta
-     */
+    FuncionarioDto usuarioLogado;
+
     public TelaConsulta() {
         initComponents();
     }
@@ -39,6 +31,11 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Consultas");
@@ -94,9 +91,9 @@ public class TelaConsulta extends javax.swing.JFrame {
                                 .addGap(289, 289, 289)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonConsultaEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonConsultarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButtonConsultaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jButtonConsultarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 295, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -111,11 +108,11 @@ public class TelaConsulta extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jButtonConsultaCliente)
                 .addGap(34, 34, 34)
-                .addComponent(jButtonConsultaFuncionario)
+                .addComponent(jButtonConsultarMesa)
                 .addGap(34, 34, 34)
                 .addComponent(jButtonConsultaEstoque)
                 .addGap(34, 34, 34)
-                .addComponent(jButtonConsultarMesa)
+                .addComponent(jButtonConsultaFuncionario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jLabelVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -175,6 +172,14 @@ public class TelaConsulta extends javax.swing.JFrame {
         ce.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonConsultaEstoqueMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        usuarioLogado = (FuncionarioDto) Util.getUsuarioLogado();
+        
+        if (!usuarioLogado.getCargo().equals("Gerente")) {
+            jButtonConsultaFuncionario.setVisible(false);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

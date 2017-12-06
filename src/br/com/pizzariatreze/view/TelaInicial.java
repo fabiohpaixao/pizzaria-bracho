@@ -30,7 +30,6 @@ public class TelaInicial extends javax.swing.JFrame {
         BotaoPedido = new javax.swing.JButton();
         jLabelSair = new javax.swing.JLabel();
         BotaoConsulta = new javax.swing.JButton();
-        lblUsuarioLogado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -74,12 +73,6 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        lblUsuarioLogado.setToolTipText("");
-        lblUsuarioLogado.setName("lblUsuarioLogado"); // NOI18N
-        FuncionarioDto usuarioLogado = (FuncionarioDto) Util.getUsuarioLogado();
-
-        lblUsuarioLogado.setText(usuarioLogado.getNome());
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,17 +97,13 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblUsuarioLogado)
-                        .addGap(127, 127, 127))))
+                        .addGap(127, 734, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblUsuarioLogado))
+                .addComponent(jLabel1)
                 .addGap(44, 44, 44)
                 .addComponent(BotaoCadastros)
                 .addGap(34, 34, 34)
@@ -219,6 +208,5 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelSair;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }
