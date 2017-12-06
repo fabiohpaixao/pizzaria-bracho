@@ -1,5 +1,3 @@
-2) Cadastro de produtos: Está dando exception.
-
 5) Reservas: Precisa ter uma lista de mesas disponíveis na data com a quantidade de lugares de cada mesa para
 que possamos selecionar quais mesas farão parte desta reserva.
 
