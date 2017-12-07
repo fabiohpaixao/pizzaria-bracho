@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.TreeMap;
 
 public class ProdutoDao {
 
@@ -214,6 +214,8 @@ public class ProdutoDao {
                         for(int i = 1; i < produto.getComposicao().size(); i++) {
                             ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
                         }
+                    }else if(!produto.getComposicaoString().equals("")){
+                        ingredientes = produto.getComposicaoString();
                     }
                     ps.setString(4, ingredientes);
                     ps.setInt(5, produto.getId());
@@ -240,7 +242,10 @@ public class ProdutoDao {
                 for(int i = 1; i < produto.getComposicao().size(); i++) {
                     ingredientes = ingredientes + "," + String.valueOf(produto.getComposicao().get(i).getId());
                 }
+            }else if(!produto.getComposicaoString().equals("")){
+                ingredientes = produto.getComposicaoString();
             }
+            
             ps.setString(4, ingredientes);
             
             ps.executeUpdate();
@@ -269,7 +274,37 @@ public class ProdutoDao {
         }
     }
 
-    public Integer pesquisarPizza(List ids) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Integer pesquisarPizza(String composicao) {
+        //this.produto = null;
+        //this.produtos.clear();
+        PreparedStatement ps = null;
+        String ingredientes = null;
+        //String[] ingredientesSplit = null;
+        IngredienteDao ingredienteDao = new IngredienteDao();
+        
+        try {
+            con = Conexao.getConexao();
+            ps = con.prepareStatement("SELECT id FROM produto WHERE composicao = ?");
+            ps.setString(1, composicao);
+            ResultSet rs = ps.executeQuery();
+            
+             if(!rs.next()) {
+                return 0;
+            }
+             
+            return rs.getInt("id");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -3,12 +3,12 @@ package br.com.pizzariatreze.view.cadastro;
 import br.com.pizzariatreze.controller.IngredienteController;
 import br.com.pizzariatreze.controller.ProdutoController;
 import br.com.pizzariatreze.dto.IngredienteDto;
-import br.com.pizzariatreze.view.TelaInicial;
 import br.com.pizzariatreze.view.TelaPedido;
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeMap;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 
 public class CadastroPizza extends javax.swing.JFrame {
 
@@ -234,16 +234,31 @@ public class CadastroPizza extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        List ids = new ArrayList<String>();
+        TreeMap<Integer, String> ids;
+        ids = new TreeMap<>();
+        String composicao = "";
         ProdutoController produto = new ProdutoController();
         
         for(int i = 0; i< listAdd.getModel().getSize();i++){
             System.out.println(listAdd.getModel().getElementAt(i));
-            
-            ids.add((String)listAdd.getModel().getElementAt(i));
+            String option = (String) listAdd.getModel().getElementAt(i);
+            String[] optionSplit = option.split("(\\-)");
+            ids.put(Integer.parseInt(optionSplit[0]), optionSplit[0]);
         }
         
-        Integer id = produto.savePizza(txtNome.getText(), ids);
+        Collection c = ids.values();
+
+        //obtain an Iterator for Collection
+        Iterator itr = c.iterator();
+
+        //iterate through TreeMap values iterator
+        while(itr.hasNext()){
+            composicao += itr.next();
+            if(itr.hasNext())
+                composicao += ",";
+        }
+
+        Integer id = produto.savePizza(txtNome.getText(), composicao);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

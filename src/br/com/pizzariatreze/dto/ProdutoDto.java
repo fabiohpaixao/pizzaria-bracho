@@ -10,6 +10,7 @@ public class ProdutoDto {
     private String nome;
     private double preco;
     private ArrayList<IngredienteDto> composicao;
+    private String composicaoString;
 
     public int getId() {
         return id;
@@ -63,4 +64,12 @@ public class ProdutoDto {
             }
         }
     }    
+
+    public void setComposicao(String composicao) {
+        this.composicaoString = composicao;
+    }
+    
+     public String getComposicaoString() {
+        return composicaoString;
+    }
 }
