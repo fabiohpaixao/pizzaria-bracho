@@ -20,4 +20,9 @@ public class ClienteController {
         Cliente cliente = new Cliente();
         return cliente.listar();
     }    
+
+    public boolean delete(int id) {
+        Cliente cliente = new Cliente();
+        return cliente.delete(id);
+    }
 }

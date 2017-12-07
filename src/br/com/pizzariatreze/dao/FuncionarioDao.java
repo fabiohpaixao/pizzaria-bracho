@@ -278,8 +278,7 @@ public class FuncionarioDao {
 
             return true;
         } catch (SQLException ex) {
-            //criar log
-            //"Erro ao excluir funcionario: " + ex.getMessage();
+            ex.printStackTrace();
             return false;
         }
     }    
