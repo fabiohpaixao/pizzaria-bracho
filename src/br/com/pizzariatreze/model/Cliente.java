@@ -90,4 +90,9 @@ public class Cliente extends Pessoa {
             
             return lista;    
     }
+
+    public boolean delete(int id) {
+        ClienteDao cdao = new ClienteDao();
+        return cdao.delete(id);
+    }
 }

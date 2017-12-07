@@ -20,5 +20,10 @@ public class IngredienteController {
         Ingrediente ingrediente = new Ingrediente();
         return ingrediente.listar(id);
     }
+
+    public boolean delete(int id) {
+        Ingrediente ingrediente = new Ingrediente();
+        return ingrediente.delete(id);
+    }
     
 }

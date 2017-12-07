@@ -182,7 +182,7 @@ public class IngredienteDao {
         String query = null;
         PreparedStatement ps = null;
         
-        query = "DELETE ingrediente WHERE id = ?";
+        query = "DELETE FROM ingrediente WHERE id = ?";
         try {
             ps = Conexao.getConexao().prepareStatement(query);
             ps.setInt(1, id);
@@ -190,8 +190,7 @@ public class IngredienteDao {
 
             return true;
         } catch (SQLException ex) {
-            //criar log
-            //"Erro ao excluir ingrediente: " + ex.getMessage();
+            ex.printStackTrace();
             return false;
         }
     }

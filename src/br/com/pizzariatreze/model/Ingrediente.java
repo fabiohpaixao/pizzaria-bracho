@@ -96,4 +96,9 @@ public class Ingrediente {
             
     }
 
+    public boolean delete(int id) {
+        IngredienteDao idao = new IngredienteDao();
+        return idao.delete(id);
+    }
+
 }
