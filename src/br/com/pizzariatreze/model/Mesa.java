@@ -33,5 +33,10 @@ public class Mesa {
             
             return lista;    
     }
+
+    public boolean delete(int id) {
+        MesaDao mdao = new MesaDao();
+        return mdao.delete(id);
+    }
     
 }
