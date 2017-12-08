@@ -157,4 +157,8 @@ public class Funcionario extends Pessoa {
             
     }
 
+    public boolean delete(int id) {
+        FuncionarioDao fdao = new FuncionarioDao();
+        return fdao.delete(id);
+    }
 }

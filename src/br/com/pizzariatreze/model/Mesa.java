@@ -38,5 +38,4 @@ public class Mesa {
         MesaDao mdao = new MesaDao();
         return mdao.delete(id);
     }
-    
 }

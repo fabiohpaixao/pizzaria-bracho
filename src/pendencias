@@ -4,7 +4,7 @@ que possamos selecionar quais mesas farão parte desta reserva.
 6) Pedidos: Falta o core principal de pedido e cadastro de nova pizza com verificação se a configuração de
 montagem da pizza já existe na base.
 
-7) Criar os deletes e alters dos itens(produto, funcionario, cliente, ingrediente, mesa)
+7) Criar os alters dos itens(funcionario, cliente, ingrediente, mesa)
 
 8) Testes: Testes dos models e Daos(usados).
 

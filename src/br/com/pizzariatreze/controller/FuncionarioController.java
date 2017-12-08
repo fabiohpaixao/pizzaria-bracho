@@ -20,5 +20,9 @@ public class FuncionarioController {
         Funcionario funcionario = new Funcionario();
         return funcionario.save(mapFuncionario);
     }
-    
+
+    public boolean delete(int id) {
+        Funcionario funcionario = new Funcionario();
+        return funcionario.delete(id);
+    }
 }

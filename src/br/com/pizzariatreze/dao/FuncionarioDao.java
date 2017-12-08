@@ -270,7 +270,7 @@ public class FuncionarioDao {
         String query = null;
         PreparedStatement ps = null;
         
-        query = "DELETE funcionario WHERE id = ?";
+        query = "DELETE FROM funcionario WHERE id = ?";
         try {
             ps = Conexao.getConexao().prepareStatement(query);
             ps.setInt(1, id);
