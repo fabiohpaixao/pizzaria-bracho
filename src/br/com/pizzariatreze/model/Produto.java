@@ -2,6 +2,7 @@ package br.com.pizzariatreze.model;
 
 import br.com.pizzariatreze.dao.ProdutoDao;
 import br.com.pizzariatreze.dto.ProdutoDto;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -44,10 +45,11 @@ public class Produto {
             
             produtoDto.setPreco(preco);
         }
+        
         return produtoDao.save(produtoDto);
     }  
 
-    public Integer savePizza(String nome, String composicao) {
+    public Object savePizza(String nome, String composicao) {
         ProdutoDao produtoDao = new ProdutoDao();
         ProdutoDto produtoDto = new ProdutoDto();
         
@@ -57,10 +59,27 @@ public class Produto {
             produtoDto.setNome(nome);
             produtoDto.setComposicao(composicao);
             
-            produtoDao.save(produtoDto);
+            if(produtoDao.save(produtoDto))
+                savePizza(nome, composicao);
         }
         
-        return 0;
+        return produtoDao.getById(id);
+    }
+
+    public List listar() {
+        ProdutoDao produtoDao = new ProdutoDao();
+        ProdutoDto produtoDto = new ProdutoDto();
+        
+        return produtoDao.search(produtoDto);
+    }
+
+    public List listarProdutos() {
+        ProdutoDao produtoDao = new ProdutoDao();
+        ProdutoDto produtoDto = new ProdutoDto();
+        
+        produtoDto.setComposicao("");
+        
+        return produtoDao.search(produtoDto);
     }
 
 }

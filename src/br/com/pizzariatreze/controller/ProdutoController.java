@@ -1,6 +1,7 @@
 package br.com.pizzariatreze.controller;
 
 import br.com.pizzariatreze.model.Produto;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,9 +12,19 @@ public class ProdutoController {
         return produto.save(mapProduto);
     }
     
-    public Integer savePizza(String nome, String composicao){
+    public Object savePizza(String nome, String composicao){
         Produto produto = new Produto();
         return produto.savePizza(nome, composicao);
+    }
+
+    public List listar() {
+        Produto produto = new Produto();
+        return produto.listar();
+    }
+
+    public List listarProdutos() {
+        Produto produto = new Produto();
+        return produto.listarProdutos();
     }
     
 }
