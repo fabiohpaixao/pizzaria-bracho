@@ -4,3 +4,5 @@ build.xml
 build/
 dist/
 *.class
+src/br/com/pizzariatreze/bd/Conexao\.java
+/nbdist/
