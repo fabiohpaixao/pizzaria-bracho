@@ -29,7 +29,7 @@ public class Cliente extends Pessoa {
         ClienteDto clienteDto = new ClienteDto();
 
         if (cliente.containsKey("id")) { 
-            clienteDto.setId((int)cliente.get("id"));
+            clienteDto.setId(Integer.parseInt((String) cliente.get("id")));
         }
         
         if (cliente.containsKey("nome")) {

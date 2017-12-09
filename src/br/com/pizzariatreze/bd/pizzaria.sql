@@ -145,4 +145,8 @@ ALTER TABLE `produto` ADD COLUMN `descricao` VARCHAR(255) NULL;
 
 ALTER TABLE `produto` MODIFY `composicao` VARCHAR(511) NULL;
 
+ALTER TABLE `funcionario` MODIFY `endereco` VARCHAR(255) NULL;
+
+ALTER TABLE `funcionario` MODIFY `telefone` VARCHAR(15) NULL;
+
 SET FOREIGN_KEY_CHECKS=1; #after your delete

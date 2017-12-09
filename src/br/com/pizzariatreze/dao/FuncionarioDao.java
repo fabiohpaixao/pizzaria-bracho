@@ -155,8 +155,7 @@ public class FuncionarioDao {
                     
                     return true;
                 } catch (SQLException ex) {
-                    //criar log
-                    //"Erro ao atualizar funcionario: " + ex.getMessage();
+                    ex.printStackTrace();
                     return false;
                 }
             }
@@ -176,8 +175,7 @@ public class FuncionarioDao {
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            //criar log
-            //"Erro ao inserir funcionario: " + ex.getMessage();
+            ex.printStackTrace();
             return false;
         }
     }

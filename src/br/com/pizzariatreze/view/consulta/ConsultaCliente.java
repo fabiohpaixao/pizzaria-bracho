@@ -2,6 +2,7 @@ package br.com.pizzariatreze.view.consulta;
 
 import br.com.pizzariatreze.controller.ClienteController;
 import br.com.pizzariatreze.tablemodel.ClienteTableModel;
+import br.com.pizzariatreze.view.editar.EditarCliente;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -288,7 +289,14 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         Integer id = (Integer) jTableCliente.getValueAt(jTableCliente.getSelectedRow(),0);
-        System.out.println(id);
+        try { 
+            EditarCliente ec = new EditarCliente(id);
+            ec.setVisible(true);
+            dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao editar cliente.");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jTableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClienteMouseClicked

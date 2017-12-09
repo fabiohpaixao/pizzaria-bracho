@@ -30,6 +30,7 @@ public class ClienteDao {
                 this.cliente.setTelefone(rs.getString("telefone"));
                 this.cliente.setNome(rs.getString("nome"));
                 this.cliente.setEndereco(rs.getString("endereco"));
+                this.cliente.setCpf(rs.getString("cpf"));
                 return this.cliente;
             } else {
                 return null;
