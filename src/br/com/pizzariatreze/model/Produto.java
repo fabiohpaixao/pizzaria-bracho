@@ -4,7 +4,6 @@ import br.com.pizzariatreze.dao.ProdutoDao;
 import br.com.pizzariatreze.dto.ProdutoDto;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Produto {
 

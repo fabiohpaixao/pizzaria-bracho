@@ -1,7 +1,7 @@
 5) Reservas: Precisa ter uma lista de mesas disponíveis na data com a quantidade de lugares de cada mesa para
 que possamos selecionar quais mesas farão parte desta reserva.
 
-7) Criar os alters dos itens(funcionario, cliente, ingrediente, mesa)
+7) Criar os alters dos itens(funcionario, ingrediente, mesa)
 
 8) Testes: Testes dos models e Daos(usados).
 
