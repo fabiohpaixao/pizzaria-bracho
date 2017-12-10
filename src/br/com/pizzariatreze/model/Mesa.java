@@ -38,4 +38,12 @@ public class Mesa {
         MesaDao mdao = new MesaDao();
         return mdao.delete(id);
     }
+
+    public List<Object> listarMesasLivres() {
+            MesaDao ddao = new MesaDao();
+            List<Object> lista;
+            lista = ddao.listarMesasLivres();
+            
+            return lista; 
+    }
 }

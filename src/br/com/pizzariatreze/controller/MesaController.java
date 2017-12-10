@@ -19,4 +19,9 @@ public class MesaController {
         Mesa mesa = new Mesa();
         return mesa.delete(id);
     }
+
+    public List<Object> listarMesasLivres() {
+        Mesa mesa = new Mesa();
+        return mesa.listarMesasLivres();
+    }
 }

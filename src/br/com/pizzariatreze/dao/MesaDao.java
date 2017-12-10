@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MesaDao {
 
-    private ArrayList<MesaDto> mesas = null;
+    private ArrayList<MesaDto> mesas = new ArrayList<>();
     private MesaDto mesa = null;
     private Connection con = null;
     
@@ -338,6 +338,46 @@ public class MesaDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
+        }
+    }
+
+    public List<Object> listarMesasLivres() {
+        
+        List<Object> mesasObj = new ArrayList<>();
+        this.mesas.clear();
+        this.mesa = null;
+        PreparedStatement ps = null;
+        
+        try {
+            con = Conexao.getConexao();
+            ps = con.prepareStatement("SELECT * FROM pizzaria.mesa where reservas IS NULL OR reservas= \"\"");
+            ResultSet rs = ps.executeQuery();
+            
+            if(!rs.next()) {
+                return null;
+            }
+            
+            do {
+                this.mesa = new MesaDto();
+                this.mesa.setId(rs.getInt("id"));
+                this.mesa.setNumero(rs.getInt("numero"));
+                this.mesa.setQtdLugares(rs.getInt("qtd_lugares"));
+                this.mesas.add(this.mesa);
+                mesasObj.add(this.mesa);
+            } while (rs.next());
+            
+            return mesasObj;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
