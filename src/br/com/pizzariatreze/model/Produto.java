@@ -12,7 +12,7 @@ public class Produto {
         ProdutoDto produtoDto = new ProdutoDto();
 
         if(produto.containsKey("id")) {
-            produtoDto.setId((int)produto.get("id"));
+            produtoDto.setId(Integer.parseInt((String) produto.get("id")));
         }
         
         if(produto.containsKey("nome")) {

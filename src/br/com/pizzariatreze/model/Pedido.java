@@ -33,7 +33,7 @@ public class Pedido {
         PedidoDto pedidoDto = new PedidoDto();
 
         if (pedido.containsKey("id")) { 
-            pedidoDto.setId((int)pedido.get("id"));
+            pedidoDto.setId(Integer.parseInt((String) pedido.get("id")));
         }
         
         if (pedido.containsKey("cliente")) {

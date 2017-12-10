@@ -12,7 +12,7 @@ public class Ingrediente {
         IngredienteDto ingredienteDto = new IngredienteDto();
 
         if(ingrediente.containsKey("id")) {
-            ingredienteDto.setId((int)ingrediente.get("id"));
+            ingredienteDto.setId(Integer.parseInt((String) ingrediente.get("id")));
         }
         
         if(ingrediente.containsKey("nome")) {

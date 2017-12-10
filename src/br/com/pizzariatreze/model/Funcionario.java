@@ -38,7 +38,7 @@ public class Funcionario extends Pessoa {
         FuncionarioDto funcionarioDto = new FuncionarioDto();
 
         if(funcionario.containsKey("id")) {
-            funcionarioDto.setId((int)funcionario.get("id"));
+            funcionarioDto.setId(Integer.parseInt((String) funcionario.get("id")));
         }
         
         if(funcionario.containsKey("nome")) {

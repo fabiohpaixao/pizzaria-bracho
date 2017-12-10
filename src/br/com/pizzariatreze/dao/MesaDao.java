@@ -192,8 +192,7 @@ public class MesaDao {
         }
     }
     
-    public String save(MesaDto mesa) {
-        String result = "Erro ao inserir/atualizar o mesa";
+    public boolean save(MesaDto mesa) {
         String query = null;
         PreparedStatement ps = null;
         String reservas = null;
@@ -214,33 +213,34 @@ public class MesaDao {
                     ps.setInt(4, mesa.getId());
                     ps.executeUpdate();
                     
-                    return "Mesa atualizada com sucesso.";
+                    return true;
                 } catch (SQLException ex) {
-                    return "Erro ao atualizar mesa: " + ex.getMessage();
+                    ex.printStackTrace();
+                    return false;
                 }
             }
         }
         
         try {
-            query = mesa.getId() != 0 ? "INSERT INTO mesa(numero, qtd_lugares, reservas, id) VALUES (?,?,?,?)" : "INSERT INTO mesa(numero, qtd_lugares, reservas) VALUES (?,?,?)";
+            query = "INSERT INTO mesa(numero, qtd_lugares, reservas) VALUES (?,?,?)";
             ps = Conexao.getConexao().prepareStatement(query);
             ps.setInt(1, mesa.getNumero());
             ps.setInt(2, mesa.getQtdLugares());
-            reservas = String.valueOf(mesa.getCodReserva().get(0));
-            for(int i = 1; i < mesa.getCodReserva().size(); i++) {
-                reservas = reservas + "," + String.valueOf(mesa.getCodReserva().get(i));
+            reservas = "";
+            if(mesa.getCodReserva().size() > 0) {
+                reservas = String.valueOf(mesa.getCodReserva().get(0));
+                for(int i = 1; i < mesa.getCodReserva().size(); i++) {
+                    reservas = reservas + "," + String.valueOf(mesa.getCodReserva().get(i));
+                }
             }
             ps.setString(3, reservas);
-            if(mesa.getId() != 0) {
-                ps.setInt(4, mesa.getId());
-            }
             ps.executeUpdate();
-            result = "Mesa criada com sucesso.";
+            
+            return true;
         } catch (SQLException ex) {
-            return "Erro ao inserir mesa: " + ex.getMessage();
+            ex.printStackTrace();
+            return false;
         }
-        
-        return result;
     }
     
     public List<Object> search(MesaDto mesa) {
