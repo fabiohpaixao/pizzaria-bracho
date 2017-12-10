@@ -4,6 +4,7 @@ import br.com.pizzariatreze.controller.IngredienteController;
 import br.com.pizzariatreze.dto.FuncionarioDto;
 import br.com.pizzariatreze.tablemodel.IngredienteTableModel;
 import br.com.pizzariatreze.util.Util;
+import br.com.pizzariatreze.view.editar.EditarIngrediente;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -269,7 +270,14 @@ public class ConsultaEstoque extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         Integer id = (Integer) jTableIngrediente.getValueAt(jTableIngrediente.getSelectedRow(),0);
-        System.out.println(id);
+        try { 
+            EditarIngrediente ei = new EditarIngrediente(id);
+            ei.setVisible(true);
+            dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao editar ingrediente.");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jTableIngredienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableIngredienteMouseClicked

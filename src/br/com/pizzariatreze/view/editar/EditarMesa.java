@@ -4,6 +4,7 @@ import br.com.pizzariatreze.view.cadastro.*;
 import br.com.pizzariatreze.controller.*;
 import br.com.pizzariatreze.dao.MesaDao;
 import br.com.pizzariatreze.dto.MesaDto;
+import br.com.pizzariatreze.view.consulta.ConsultaMesa;
 import br.com.pizzariatreze.view.consulta.TelaConsulta;
 import java.util.HashMap;
 import java.util.Map;
@@ -153,8 +154,8 @@ public class EditarMesa extends javax.swing.JFrame {
 
     private void jLabelVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVoltarMouseClicked
         // TODO add your handling code here:
-        TelaConsulta tc = new TelaConsulta();
-        tc.setVisible(true);
+        ConsultaMesa cm = new ConsultaMesa();
+        cm.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabelVoltarMouseClicked
 

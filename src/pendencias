@@ -1,8 +1,9 @@
-5) Reservas: Precisa ter uma lista de mesas disponíveis na data com a quantidade de lugares de cada mesa para
-que possamos selecionar quais mesas farão parte desta reserva.
+1) Reservas: Bug ao abrir a tela de reservas (Paixão) - Est. 15 min.
 
-7) Criar os alters dos itens(ingrediente)
+2) Tela de "gerenciamento" de pedidos (Bruno) Est. 1h.
 
-8) Testes: Testes dos models e Daos(usados).
+3) acesso ao excluir e editar ingredientes apenas para gerente. (Bruno) Est. 10 min.
 
-9) Documentação: atualizar a documentação do projeto.
+4) Testes: Testes dos models e Daos(usados). (Paixão e Bruno) Est. 4h
+
+5) Documentação: atualizar a documentação do projeto. (Nina e/ou Bruno) Est. 1h.
