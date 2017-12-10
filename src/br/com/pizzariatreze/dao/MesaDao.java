@@ -33,8 +33,10 @@ public class MesaDao {
                 this.mesa.setQtdLugares(rs.getInt("qtd_lugares"));
                 reservas = rs.getString("reservas");
                 reservasSplit = reservas.split(",");
-                for (int i = 0; i < reservasSplit.length; i++) {
-                    this.mesa.setCodReserva(Integer.parseInt(reservasSplit[i]));
+                if(!reservas.equals(null) && reservas.length() > 0) {
+                    for (int i = 0; i < reservasSplit.length; i++) {
+                        this.mesa.setCodReserva(Integer.parseInt(reservasSplit[i]));
+                    }
                 }
                 return this.mesa;
             } else {
@@ -200,17 +202,12 @@ public class MesaDao {
         if(mesa.getId() != 0) {
             MesaDto mesaBD = this.getById(mesa.getId());
             if(mesaBD != null) {
-                query = "UPDATE mesa SET numero = ?, qtd_lugares = ?, reservas = ? WHERE id = ?";
+                query = "UPDATE mesa SET numero = ?, qtd_lugares = ? WHERE id = ?";
                 try {
                     ps = Conexao.getConexao().prepareStatement(query);
                     ps.setInt(1, mesa.getNumero());
                     ps.setInt(2, mesa.getQtdLugares());
-                    reservas = String.valueOf(mesa.getCodReserva().get(0));
-                    for(int i = 1; i < mesa.getCodReserva().size(); i++) {
-                        reservas = reservas + "," + String.valueOf(mesa.getCodReserva().get(i));
-                    }
-                    ps.setString(3, reservas);
-                    ps.setInt(4, mesa.getId());
+                    ps.setInt(3, mesa.getId());
                     ps.executeUpdate();
                     
                     return true;

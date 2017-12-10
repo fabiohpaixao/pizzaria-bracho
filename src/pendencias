@@ -1,12 +1,8 @@
 5) Reservas: Precisa ter uma lista de mesas disponíveis na data com a quantidade de lugares de cada mesa para
 que possamos selecionar quais mesas farão parte desta reserva.
 
-7) Criar os alters dos itens(funcionario, ingrediente, mesa)
+7) Criar os alters dos itens(ingrediente)
 
 8) Testes: Testes dos models e Daos(usados).
 
-Perfumaria:
-
-9) Remoções: Remover "excesso" de código não usado.
-
-10) Mostrar nome e link para logout no topo das telas
+9) Documentação: atualizar a documentação do projeto.
