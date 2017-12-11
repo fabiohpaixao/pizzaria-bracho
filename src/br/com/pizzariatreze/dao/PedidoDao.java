@@ -4,11 +4,13 @@ import br.com.pizzariatreze.bd.Conexao;
 import br.com.pizzariatreze.dao.ClienteDao;
 import br.com.pizzariatreze.dao.FuncionarioDao;
 import br.com.pizzariatreze.dto.PedidoDto;
+import br.com.pizzariatreze.dto.ProdutoDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PedidoDao {
 
@@ -356,8 +358,7 @@ public class PedidoDao {
                     
                     return true;
                 } catch (SQLException ex) {
-                    //Criar log
-                    //"Erro ao atualizar pedido: " + ex.getMessage();
+                    ex.printStackTrace();
                     return false;
                 }
             }
@@ -386,10 +387,102 @@ public class PedidoDao {
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            //Criar log
-            //"Erro ao inserir pedido: " + ex.getMessage();
             ex.printStackTrace();
             return false;
         }
+    }
+
+    public List<Object> search(PedidoDto pedido) {
+        this.pedido = null;
+        List<Object> pedidosObj = new ArrayList<>();
+        ClienteDao cdao = new ClienteDao();
+        FuncionarioDao fdao = new FuncionarioDao();
+        ProdutoDao pdao = new ProdutoDao();
+        
+        try{
+            con = Conexao.getConexao();
+            String sql = "SELECT * FROM pedido";
+            PreparedStatement ps = null;
+        
+            List parametros = new ArrayList<>();
+
+            if (pedido.getId() > 0) {
+                sql += " WHERE id = ? ";
+                parametros.add(pedido.getId());
+            } else {
+                List alt = pedido.getAlterado();
+                String sqlWhere = "";
+                int index = 1;
+
+                if(alt.contains("id_cliente")) {
+                    sqlWhere += " AND id_cliente = ? ";
+                    parametros.add(pedido.getCliente());
+                }
+
+                if(alt.contains("id_funcionario")){
+                    sqlWhere += " AND id_funcionario = ? ";
+                    parametros.add(pedido.getFuncionario());
+                }
+
+                if(alt.contains("preco")){
+                    sqlWhere += " AND preco = ? ";
+                    parametros.add(pedido.getPreco());
+                }
+
+                if(alt.contains("status")){
+                    sqlWhere += " AND status = ? ";
+                    parametros.add(pedido.getStatus());
+                }
+
+                if(alt.contains("tipo")){
+                    sqlWhere += " AND tipo = ? ";
+                    parametros.add(pedido.getTipo());
+                }
+
+                if(sqlWhere.length() > 0) sql += " WHERE 1=1 " + sqlWhere;
+            }
+
+            ps = con.prepareStatement(sql);
+            int index = 1;
+
+            for(Object i : parametros){
+                ps.setObject(index, i);
+                index++;
+            }
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                do {
+                    this.pedido = new PedidoDto();
+                    this.pedido.setId(rs.getInt("id"));
+                    this.pedido.setData(rs.getString("data"));
+                    this.pedido.setStatus(rs.getInt("status"));
+                    this.pedido.setDescricao(rs.getString("descricao"));
+                    this.pedido.setTipo(rs.getInt("tipo"));
+                    this.pedido.setPreco(rs.getDouble("preco"));
+                    this.pedido.setCliente(cdao.getById(rs.getInt("id_cliente")));
+                    this.pedido.setFuncionario(fdao.getById(rs.getInt("id_funcionario")));
+                    String produtos = rs.getString("composicao");
+                    this.pedido.setComposicao(produtos);
+                    if(!produtos.equals("") && !produtos.equals(null)) {
+                        String[] produtosSplit = produtos.split(",");
+                        for (int i = 0; i < produtosSplit.length; i++) {
+                            String[] qtdSplit = produtosSplit[i].split("|");
+                            int idProduto = Integer.parseInt(qtdSplit[0]);
+                            ProdutoDto addProduto = pdao.getById(idProduto);
+                            if(addProduto != null) {
+                                this.pedido.setComposicao(addProduto);
+                            }
+                        }
+                    }
+                    pedidosObj.add((Object)this.pedido);
+                } while (rs.next());
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return pedidosObj;
     }
 }

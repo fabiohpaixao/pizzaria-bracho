@@ -59,7 +59,7 @@ public class Produto {
             produtoDto.setComposicao(composicao);
             
             if(produtoDao.save(produtoDto))
-                savePizza(nome, composicao);
+                return savePizza(nome, composicao);
         }
         
         return produtoDao.getById(id);
@@ -80,5 +80,4 @@ public class Produto {
         
         return produtoDao.search(produtoDto);
     }
-
 }

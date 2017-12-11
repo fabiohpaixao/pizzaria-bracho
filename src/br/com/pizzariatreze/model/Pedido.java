@@ -4,6 +4,7 @@ import br.com.pizzariatreze.dao.PedidoDao;
 import br.com.pizzariatreze.dto.ClienteDto;
 import br.com.pizzariatreze.dto.FuncionarioDto;
 import br.com.pizzariatreze.dto.PedidoDto;
+import java.util.List;
 import java.util.Map;
 
 public class Pedido {
@@ -88,4 +89,28 @@ public class Pedido {
         
         return pedidoDao.save(pedidoDto);
     }    
+
+    public List<Object> listar() {
+        PedidoDto pedido = new PedidoDto();
+        
+        PedidoDao pdao = new PedidoDao();
+        List<Object> lista;
+        lista = pdao.search(pedido);
+        
+        return lista;    
+    }
+
+    public List<Object> listar(int id) {
+        PedidoDto pedido = new PedidoDto();
+        
+        if(id > 0) {
+            pedido.setId(id);
+        }
+        
+        PedidoDao pdao = new PedidoDao();
+        List<Object> lista;
+        lista = pdao.search(pedido);
+        
+        return lista;
+    }
 }
