@@ -202,12 +202,13 @@ public class MesaDao {
         if(mesa.getId() != 0) {
             MesaDto mesaBD = this.getById(mesa.getId());
             if(mesaBD != null) {
-                query = "UPDATE mesa SET numero = ?, qtd_lugares = ? WHERE id = ?";
+                query = "UPDATE mesa SET numero = ?, qtd_lugares = ?, status = ? WHERE id = ?";
                 try {
                     ps = Conexao.getConexao().prepareStatement(query);
                     ps.setInt(1, mesa.getNumero());
                     ps.setInt(2, mesa.getQtdLugares());
-                    ps.setInt(3, mesa.getId());
+                    ps.setInt(3, mesa.getStatus());
+                    ps.setInt(4, mesa.getId());
                     ps.executeUpdate();
                     
                     return true;
@@ -219,7 +220,7 @@ public class MesaDao {
         }
         
         try {
-            query = "INSERT INTO mesa(numero, qtd_lugares, reservas) VALUES (?,?,?)";
+            query = "INSERT INTO mesa(numero, qtd_lugares, reservas, status) VALUES (?,?,?,?)";
             ps = Conexao.getConexao().prepareStatement(query);
             ps.setInt(1, mesa.getNumero());
             ps.setInt(2, mesa.getQtdLugares());
@@ -231,6 +232,7 @@ public class MesaDao {
                 }
             }
             ps.setString(3, reservas);
+            ps.setInt(4, mesa.getStatus());
             ps.executeUpdate();
             
             return true;
@@ -268,6 +270,11 @@ public class MesaDao {
                 if(alt.contains("qtd_lugares")){
                     sqlWhere += " AND qtd_lugares = ? ";
                     parametros.add(mesa.getQtdLugares());
+                }
+
+                if(alt.contains("status")){
+                    sqlWhere += " AND status = ? ";
+                    parametros.add(mesa.getStatus());
                 }
 
                 if(alt.contains("reservas")){
@@ -347,7 +354,7 @@ public class MesaDao {
         
         try {
             con = Conexao.getConexao();
-            ps = con.prepareStatement("SELECT * FROM pizzaria.mesa where reservas IS NULL OR reservas= \"\"");
+            ps = con.prepareStatement("SELECT * FROM pizzaria.mesa where status = 0");
             ResultSet rs = ps.executeQuery();
             
             if(!rs.next()) {

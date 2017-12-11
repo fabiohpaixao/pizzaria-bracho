@@ -149,4 +149,6 @@ ALTER TABLE `funcionario` MODIFY `endereco` VARCHAR(255) NULL;
 
 ALTER TABLE `funcionario` MODIFY `telefone` VARCHAR(15) NULL;
 
+ALTER TABLE `mesa` ADD COLUMN `status` int(1) NOT NULL DEFAULT 0;
+
 SET FOREIGN_KEY_CHECKS=1; #after your delete
