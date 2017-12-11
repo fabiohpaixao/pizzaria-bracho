@@ -34,7 +34,7 @@ public class Pedido {
         PedidoDto pedidoDto = new PedidoDto();
 
         if (pedido.containsKey("id")) { 
-            pedidoDto.setId(Integer.parseInt((String) pedido.get("id")));
+            pedidoDto.setId(Integer.parseInt(String.valueOf(pedido.get("id"))));
         }
         
         if (pedido.containsKey("cliente")) {
@@ -77,7 +77,7 @@ public class Pedido {
             if (pedido.get("status").toString().trim().isEmpty()) {
                 throw new Exception("Status deve estar corretamente preenchido.");
             }
-            pedidoDto.setStatus((Integer)pedido.get("status"));
+            pedidoDto.setStatus(Integer.parseInt(String.valueOf(pedido.get("status"))));
         }
                 
         if (pedido.containsKey("tipo")) {

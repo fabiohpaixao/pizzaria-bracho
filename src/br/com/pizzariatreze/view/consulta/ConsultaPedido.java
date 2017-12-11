@@ -2,7 +2,7 @@ package br.com.pizzariatreze.view.consulta;
 
 import br.com.pizzariatreze.controller.PedidoController;
 import br.com.pizzariatreze.tablemodel.DetalhesPedidoTableModel;
-//import br.com.pizzariatreze.view.editar.EditarPedido;
+import br.com.pizzariatreze.view.editar.DetalhesPedido;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -200,14 +200,14 @@ public class ConsultaPedido extends javax.swing.JFrame {
 
     private void btnDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesActionPerformed
         Integer id = (Integer) jTablePedido.getValueAt(jTablePedido.getSelectedRow(),0);
-//        try { 
-//            EditarPedido ep = new EditarPedido(id);
-//            ep.setVisible(true);
-//            dispose();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(null, "Erro ao visualizar detalhes do pedido.");
-//        }
+        try { 
+            DetalhesPedido dp = new DetalhesPedido(id);
+            dp.setVisible(true);
+            dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao visualizar detalhes do pedido.");
+        }
     }//GEN-LAST:event_btnDetalhesActionPerformed
 
     private void jTablePedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePedidoMouseClicked
