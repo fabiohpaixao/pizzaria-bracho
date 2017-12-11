@@ -257,7 +257,9 @@ public class ProdutoDao {
                     preco = preco + idao.getById(Integer.parseInt(ingredientesSplit[i])).getValor();
                 }
             }
-            produto.setPreco(preco);
+            
+            if(produto.getPreco() < preco)
+                produto.setPreco(preco);
             
             ps.setString(1, produto.getNome());
             ps.setDouble(2, produto.getPreco());

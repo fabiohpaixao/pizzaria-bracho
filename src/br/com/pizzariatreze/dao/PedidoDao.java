@@ -374,7 +374,7 @@ public class PedidoDao {
             ps.setDouble(5, pedido.getPreco());
             ps.setInt(6, pedido.getCliente().getId());
             ps.setInt(7, pedido.getFuncionario().getId());
-            if(pedido.getComposicao() != null) {
+            if(!pedido.getComposicao().isEmpty()) {
                 produtos = String.valueOf(pedido.getComposicao().get(0).getId());
                 for(int i = 1; i < pedido.getComposicao().size(); i++) {
                     produtos = produtos + "," + String.valueOf(pedido.getComposicao().get(i).getId());
