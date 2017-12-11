@@ -32,7 +32,7 @@ public class ReservaMesa extends javax.swing.JFrame {
         jLabelVoltar = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMesa = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
@@ -59,14 +59,26 @@ public class ReservaMesa extends javax.swing.JFrame {
 
         jLabel4.setText("Nome:");
 
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.setEnabled(false);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
             }
         });
 
         jTableMesa.setModel(new MesaTableModel());
+        jTableMesa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMesaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableMesa);
 
         jLabel3.setText("Mesas disponíveis nesa data:");
@@ -80,7 +92,7 @@ public class ReservaMesa extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btnConfirmar)
                         .addGap(18, 18, 18)
                         .addComponent(jLabelVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -111,7 +123,7 @@ public class ReservaMesa extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnConfirmar))
                 .addContainerGap())
         );
 
@@ -136,12 +148,26 @@ public class ReservaMesa extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         ReservaController reservaCtrl = new ReservaController();
         List<Integer> ids = new ArrayList<>();
+        
+        for(int r : jTableMesa.getSelectedRows()){
+            ids.add((Integer) jTableMesa.getValueAt(r,0));
+        }
+        
         String nome = txtNome.getText();
-        reservaCtrl.reservar(nome, ids);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        String resposta = "";
+        try {
+            resposta = reservaCtrl.reservar(nome, ids); ? "Reserva feita com sucesso." : "Erro ao reservar mesas.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            resposta = e.getMessage();
+        }
+        
+        JOptionPane.showMessageDialog(null, resposta);
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void jLabelVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVoltarMouseClicked
         TelaInicial ti = new TelaInicial();
@@ -153,6 +179,17 @@ public class ReservaMesa extends javax.swing.JFrame {
         MesaController mesaCtrl = new MesaController();
         atualizar(mesaCtrl.listarMesasLivres());
     }//GEN-LAST:event_formWindowOpened
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void jTableMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMesaMouseClicked
+               
+        if(jTableMesa.getSelectedRows().length > 0)
+            btnConfirmar.setEnabled(true);
+        else
+            btnConfirmar.setEnabled(false);
+    }//GEN-LAST:event_jTableMesaMouseClicked
 
     public void atualizar(List<Object> lista) {
         try {
@@ -204,7 +241,7 @@ public class ReservaMesa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnConfirmar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

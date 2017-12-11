@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Reserva {
 
-    public void reservar(String nome, List<Integer> ids) {
+    public boolean reservar(String nome, List<Integer> ids) {
         ReservaDao reservaDao = new ReservaDao();
         ReservaDto reservaDto = new ReservaDto();
         
@@ -21,6 +21,7 @@ public class Reserva {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         
         for (Integer id : ids) {
+            mesaDto.setId(id);
             mesaDto.setStatus(1);
             mesaDao.save(mesaDto);
             
@@ -29,7 +30,7 @@ public class Reserva {
                 
                 comp = id.toString();
             }else{
-                comp = "," + id;
+                comp += "," + id;
             }
         }
         
@@ -38,7 +39,7 @@ public class Reserva {
         reservaDto.setStatus(0);
         reservaDto.setData(formato.format(new Date()));
         
-        reservaDao.save(reservaDto);
+        return reservaDao.save(reservaDto);
 
     }
 

@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class ReservaController {
 
-    public void reservar(String nome, List<Integer> ids) {
+    public boolean reservar(String nome, List<Integer> ids) {
         Reserva reserva = new Reserva();
         
-        reserva.reservar(nome, ids);
+        return reserva.reservar(nome, ids);
     }
     
 }
