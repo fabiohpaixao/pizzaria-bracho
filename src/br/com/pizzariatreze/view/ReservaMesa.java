@@ -160,7 +160,7 @@ public class ReservaMesa extends javax.swing.JFrame {
         
         String resposta = "";
         try {
-            resposta = reservaCtrl.reservar(nome, ids); ? "Reserva feita com sucesso." : "Erro ao reservar mesas.";
+            resposta = reservaCtrl.reservar(nome, ids) ? "Reserva feita com sucesso." : "Erro ao reservar mesas.";
         } catch (Exception e) {
             e.printStackTrace();
             resposta = e.getMessage();
