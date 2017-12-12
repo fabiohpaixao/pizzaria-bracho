@@ -1,6 +1,8 @@
 package br.com.pizzariatreze.view.editar;
 
+import br.com.pizzariatreze.controller.IngredienteController;
 import br.com.pizzariatreze.controller.PedidoController;
+import br.com.pizzariatreze.dao.IngredienteDao;
 import br.com.pizzariatreze.dao.PedidoDao;
 import br.com.pizzariatreze.dao.ProdutoDao;
 import br.com.pizzariatreze.dto.IngredienteDto;
@@ -386,6 +388,8 @@ public class DetalhesPedido extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         PedidoController pedidoCtrl = new PedidoController();
+        IngredienteDao idao = new IngredienteDao();
+        ProdutoDao prodDao = new ProdutoDao();
         
         Map<String, Object> pedido = new HashMap<>();
         pedido.put("id", this.pedido.getId());
@@ -397,6 +401,18 @@ public class DetalhesPedido extends javax.swing.JFrame {
             btnAutorizar.setEnabled(false);
             btnCancelar.setEnabled(false);
             btnFinalizar.setEnabled(false);
+            
+            String[] produtosSplit = this.pedido.getComposicaoString().split(",");
+            for (int i = 0; i < produtosSplit.length; i++) {
+                String[] produtoQtd = produtosSplit[i].split("|");
+                ProdutoDto prod = prodDao.getById(Integer.parseInt(produtoQtd[0]));
+                if (prod.getComposicao().size() > 0) {
+                    for(IngredienteDto ing : prod.getComposicao()) {
+                        ing.setQuantidade(ing.getQuantidade()-Integer.parseInt(produtoQtd[2]));
+                        idao.save(ing);
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
             resposta = e.getMessage();
