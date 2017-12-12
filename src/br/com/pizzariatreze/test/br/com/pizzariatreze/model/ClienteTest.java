@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -26,7 +22,6 @@ public class ClienteTest {
         Cliente instance = new Cliente();
         Object result = instance.getById(id);
         assertNotNull(result);
-        fail("Falha em cliente getById");
     }
     
     @Test
@@ -54,7 +49,6 @@ public class ClienteTest {
         boolean expResult = true;
         boolean result = instance.save(cliente);
         assertEquals(expResult, result);
-        fail("Falha save cliente.");
     }
 
     @Test
@@ -72,7 +66,6 @@ public class ClienteTest {
         } catch (Exception e) {
             assertEquals("Nome deve estar preenchido.", e.getMessage());
         }
-        fail("Falha save cliente sem nome.");
     }
 
     @Test
@@ -90,7 +83,6 @@ public class ClienteTest {
         } catch (Exception e) {
             assertEquals("Telefone deve estar corretamente preenchido.", e.getMessage());
         }
-        fail("Falha save cliente sem telefone.");
     }
 
     @Test
@@ -108,7 +100,6 @@ public class ClienteTest {
         } catch (Exception e) {
             assertEquals("Endereco deve estar preenchido.", e.getMessage());
         }
-        fail("Falha save cliente sem endereco.");
     }
 
     @Test
@@ -126,7 +117,6 @@ public class ClienteTest {
         } catch (Exception e) {
             assertEquals("CPF deve estar preenchido.", e.getMessage());
         }
-        fail("Falha save cliente sem cpf.");
     }
 
     @Test
@@ -136,7 +126,6 @@ public class ClienteTest {
         Cliente instance = new Cliente();
         List<Object> result = instance.listar(telefone);
         assertNotNull(result);
-        fail("Falha listar com telefone.");
     }
 
     @Test
@@ -145,7 +134,6 @@ public class ClienteTest {
         Cliente instance = new Cliente();
         List<Object> result = instance.listar();
         assertNotNull(result);
-        fail("Falha listar todos.");
     }
 
     @Test
@@ -161,18 +149,16 @@ public class ClienteTest {
         } else {
             fail("Falha ao deletar cliente.");
         }
-        fail("Falha ao deletar cliente.");
     }
     
     @Test
     public void testDeleteErro() {
         System.out.println("delete com erro");
-        int id = 0;
+        int id = 234567654;
         Cliente instance = new Cliente();
         boolean expResult = false;
         boolean result = instance.delete(id);
         assertEquals(expResult, result);
-        fail("Falha ao deletar cliente.");
     }
     
 }

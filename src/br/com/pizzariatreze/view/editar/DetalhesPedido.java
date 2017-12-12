@@ -64,10 +64,13 @@ public class DetalhesPedido extends javax.swing.JFrame {
             btnFinalizar.setEnabled(false);
             btnCancelar.setEnabled(false);
             btnAutorizar.setEnabled(false);
+            lblStringStatus.setText(pedido.getStatus() == -1 ? "Cancelado" : "Finalizado");
         } else if (pedido.getStatus() == 0) {
             btnFinalizar.setEnabled(false);
+            lblStringStatus.setText("Pendente");
         } else if (pedido.getStatus() == 1) {
             btnAutorizar.setEnabled(false);
+            lblStringStatus.setText("Autorizado");
         }
     }
 
@@ -111,6 +114,8 @@ public class DetalhesPedido extends javax.swing.JFrame {
         btnAutorizar = new javax.swing.JButton();
         lblEntrega = new javax.swing.JLabel();
         cbxSim = new javax.swing.JCheckBox();
+        lblStatus = new javax.swing.JLabel();
+        lblStringStatus = new javax.swing.JLabel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -259,6 +264,8 @@ public class DetalhesPedido extends javax.swing.JFrame {
         cbxSim.setText("Sim");
         cbxSim.setEnabled(false);
 
+        lblStatus.setText("Status Pedido:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -289,23 +296,31 @@ public class DetalhesPedido extends javax.swing.JFrame {
                                     .addComponent(lblTituloAtendente)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel2)
-                                    .addComponent(lblTituloPedido)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lblNomeAtendente)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtNomeAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lblCargo)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtCargo)))
+                                                .addGap(12, 12, 12)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(lblNomeAtendente)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(txtNomeAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(lblCargo)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(txtCargo))))
+                                            .addComponent(lblTituloPedido))
                                         .addGap(98, 98, 98)
-                                        .addComponent(lblEntrega)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxSim)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lblEntrega)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(cbxSim))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lblStatus)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(lblStringStatus)))))
+                                .addGap(0, 198, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -330,7 +345,10 @@ public class DetalhesPedido extends javax.swing.JFrame {
                     .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCargo))
                 .addGap(33, 33, 33)
-                .addComponent(lblTituloPedido)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloPedido)
+                    .addComponent(lblStatus)
+                    .addComponent(lblStringStatus))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
@@ -509,6 +527,8 @@ public class DetalhesPedido extends javax.swing.JFrame {
     private javax.swing.JLabel lblIdCliente;
     private javax.swing.JLabel lblNomeAtendente;
     private javax.swing.JLabel lblNomeCliente;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblStringStatus;
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JLabel lblTituloAtendente;
     private javax.swing.JLabel lblTituloPedido;
